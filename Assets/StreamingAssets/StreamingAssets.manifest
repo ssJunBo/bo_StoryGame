@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 353936720
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: shader
+      Dependencies: {}
+    Info_1:
+      Name: sound
+      Dependencies: {}
+    Info_2:
+      Name: assetbundleconfig
+      Dependencies: {}
+    Info_3:
+      Name: gameobject
+      Dependencies: {}
+    Info_4:
+      Name: image
+      Dependencies: {}
