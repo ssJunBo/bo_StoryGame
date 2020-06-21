@@ -102,7 +102,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
             }
             if (assetBundle == null)
             {
-                Debug.LogError(" Load AssetBundle Errot : " + fullPath);
+                Debug.LogError(" Load AssetBundle Error : " + fullPath);
             }
 
             item = m_AssetBundleItemPool.Spawn(true);
@@ -114,8 +114,55 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         {
             item.RefCount++;
         }
-
         return item.assetBundle;
+    }
+
+    /// <summary>
+    /// 释放资源
+    /// </summary>
+    /// <param name="item"></param>
+    public void ReleaseAsset(ResouceItem item)
+    {
+        if (item == null)
+        {
+            return;
+        }
+        if (item.m_DependAssetBundle != null && item.m_DependAssetBundle.Count > 0)
+        {
+            for (int i = 0; i < item.m_DependAssetBundle.Count; i++)
+            {
+                UnLoadAssetBundle(item.m_DependAssetBundle[i]);
+            }
+        }
+        UnLoadAssetBundle(item.m_AssetName);
+    }
+
+    private void UnLoadAssetBundle(string abName)
+    {
+        AssetBundleItem item = null;
+        uint crc = CRC32.GetCRC32(abName);
+
+        if (m_AssetBundleItemDic.TryGetValue(crc, out item) || item != null)
+        {
+            item.RefCount--;
+            if (item.RefCount <= 0 && item.assetBundle != null)
+            {
+                item.assetBundle.Unload(true);
+                item.Rest();
+                m_AssetBundleItemPool.Recycle(item);
+                m_AssetBundleItemDic.Remove(crc);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 根据crc查找resourceitem
+    /// </summary>
+    /// <param name="crc"></param>
+    /// <returns></returns>
+    public ResouceItem FindResouceItem(uint crc) 
+    {
+        return m_ResouceItemDic[crc];
     }
 }
 
