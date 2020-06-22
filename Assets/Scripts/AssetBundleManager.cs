@@ -134,7 +134,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
                 UnLoadAssetBundle(item.m_DependAssetBundle[i]);
             }
         }
-        UnLoadAssetBundle(item.m_AssetName);
+        UnLoadAssetBundle(item.m_ABName);
     }
 
     private void UnLoadAssetBundle(string abName)
@@ -160,7 +160,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     /// </summary>
     /// <param name="crc"></param>
     /// <returns></returns>
-    public ResouceItem FindResouceItem(uint crc) 
+    public ResouceItem FindResouceItem(uint crc)
     {
         return m_ResouceItemDic[crc];
     }
@@ -189,4 +189,30 @@ public class ResouceItem
     public List<string> m_DependAssetBundle = null;
     //该资源加载完的AB包
     public AssetBundle m_AssetBundle = null;
+
+
+    //上面跟ab包相关
+    //--------------------------------------------
+    //下面针对资源
+
+    //资源唯一标识
+    public int m_Guid = 0;
+    //资源对象
+    public Object m_Obj = null;
+    //资源最后使用的时间
+    public float m_LastUseTime = 0.0f;
+    //引用计数
+    protected int m_RefCount = 0;
+    public int RefCount
+    {
+        get { return m_RefCount; }
+        set
+        {
+            m_RefCount = value;
+            if (m_RefCount < 0)
+            {
+                Debug.LogError("refcount < 0" + m_RefCount + "，" + (m_Obj != null ? m_Obj.name : "name is null"));
+            }
+        }
+    }
 }
