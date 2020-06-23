@@ -7,7 +7,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
 {
 
     //资源关系依赖配表 可以根据crc来找到对应的资源块
-    protected Dictionary<uint, ResouceItem> m_ResouceItemDic = new Dictionary<uint, ResouceItem>();
+    protected Dictionary<uint, ResourceItem> m_ResouceItemDic = new Dictionary<uint, ResourceItem>();
     //储存已加载的ab包，key为crc
     protected Dictionary<uint, AssetBundleItem> m_AssetBundleItemDic = new Dictionary<uint, AssetBundleItem>();
     //AssetBundleItem类对象池
@@ -37,7 +37,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         for (int i = 0; i < config.ABList.Count; i++)
         {
             ABBase abBase = config.ABList[i];
-            ResouceItem item = new ResouceItem();
+            ResourceItem item = new ResourceItem();
             item.m_Crc = abBase.Crc;
             item.m_AssetName = abBase.AssetName;
             item.m_ABName = abBase.ABName;
@@ -59,9 +59,9 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     /// </summary>
     /// <param name="crc"></param>
     /// <returns></returns>
-    public ResouceItem LoadResouceAssetBundle(uint crc)
+    public ResourceItem LoadResouceAssetBundle(uint crc)
     {
-        ResouceItem item = null;
+        ResourceItem item = null;
         if (!m_ResouceItemDic.TryGetValue(crc, out item) || item == null)
         {
             Debug.LogError(string.Format("LoadResouceAssetBundle error : can not find crc {0} in AssetBundleConfig", crc.ToString()));
@@ -121,7 +121,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     /// 释放资源
     /// </summary>
     /// <param name="item"></param>
-    public void ReleaseAsset(ResouceItem item)
+    public void ReleaseAsset(ResourceItem item)
     {
         if (item == null)
         {
@@ -160,7 +160,7 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     /// </summary>
     /// <param name="crc"></param>
     /// <returns></returns>
-    public ResouceItem FindResouceItem(uint crc)
+    public ResourceItem FindResouceItem(uint crc)
     {
         return m_ResouceItemDic[crc];
     }
@@ -177,7 +177,7 @@ public class AssetBundleItem
         RefCount = 0;
     }
 }
-public class ResouceItem
+public class ResourceItem
 {
     //资源路径的crc
     public uint m_Crc = 0;
@@ -203,6 +203,9 @@ public class ResouceItem
     public float m_LastUseTime = 0.0f;
     //引用计数
     protected int m_RefCount = 0;
+    //是否跳场景清掉
+    public bool m_Clear = true;
+
     public int RefCount
     {
         get { return m_RefCount; }
