@@ -1,50 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameStart : MonoBehaviour
 {
-
-    public AudioSource m_Audio;
-    private AudioClip clip;
+    private GameObject obj;
     void Awake()
     {
+        GameObject.DontDestroyOnLoad(gameObject);
         AssetBundleManager.Instance.LoadAssetBundleConfig();
         ResourceManager.Instance.Init(this);
+        ObjectManager.Instance.Init(transform.Find("RecyclePoolTrs"), transform.Find("SceneTrs"));
     }
 
     private void Start()
     {
-        ResourceManager.Instance.PreloadRes("Assets/GameData/Sounds/menusound.mp3");
-
-        // ResourceManager.Instance.AsyncLoadResouce("Assets/GameData/Sounds/menusound.mp3",OnLoadFinish,ELoadResPriority.RES_MIDDLE);
+        obj = ObjectManager.Instance.InstantiateObject("Assets/GameData/Prefabs/Image.prefab",true);
 
     }
 
-    void OnLoadFinish(string path,Object obj,object pa1, object pa2, object pa3)
+    void OnLoadFinish(string path, Object obj, object pa1, object pa2, object pa3)
     {
-        clip = obj as AudioClip;
-        m_Audio.clip = obj as AudioClip;
-        m_Audio.Play();
+
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            //ResourceManager.Instance.ReleaseResource(clip,true);//true 表示资源不再次使用 彻底删除
-            //m_Audio.clip = null;
-            //clip = null;
-            long time = System.DateTime.Now.Ticks;
-            clip = ResourceManager.Instance.LoadResouce<AudioClip>("Assets/GameData/Sounds/menusound.mp3");
-            m_Audio.clip = clip;
-            m_Audio.Play();
+            ObjectManager.Instance.ReleaseObject(obj);
+            obj = null;
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            ResourceManager.Instance.ReleaseResource(clip,true);
-            m_Audio.clip = null;
-            clip = null;
+            obj = ObjectManager.Instance.InstantiateObject("Assets/GameData/Prefabs/Image.prefab", true);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            ObjectManager.Instance.ReleaseObject(obj, 0, true);
+            obj = null;
         }
     }
 
