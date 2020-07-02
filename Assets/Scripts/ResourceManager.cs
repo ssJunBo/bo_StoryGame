@@ -33,7 +33,8 @@ public class ResourceObj
     public OnAsyncObjFinish m_DealFinis = null;
     //异步参数
     public object m_Param1, m_Param2, m_Param3 = null;
-
+    //离线数据
+    public OfflineData m_OfflineData = null;
 
 
     public void Reset()
@@ -47,6 +48,7 @@ public class ResourceObj
         m_SetSceneParent = false;
         m_DealFinis = null;
         m_Param1 = m_Param2 = m_Param3 = null;
+        m_OfflineData = null;
     }
 }
 
@@ -99,6 +101,7 @@ public delegate void OnAsyncFinish(string path, ResourceObj objObj, object param
 
 public class ResourceManager : Singleton<ResourceManager>
 {
+    protected long m_Guid = 0;
     public bool m_LoadFromAssetBundle = true;
     //缓存使用的资源列表 
     public Dictionary<uint, ResourceItem> AssetDic = new Dictionary<uint, ResourceItem>();
@@ -132,6 +135,15 @@ public class ResourceManager : Singleton<ResourceManager>
     }
 
     /// <summary>
+    /// 创建唯一的GUID
+    /// </summary>
+    /// <returns></returns>
+    public long CreateGuid()
+    {
+        return m_Guid++;
+    }
+
+    /// <summary>
     /// 清空缓存 一般用于跳场景
     /// </summary>
     public void ClearCache()
@@ -150,6 +162,37 @@ public class ResourceManager : Singleton<ResourceManager>
             DestroyResourceItem(item, item.m_Clear);
         }
         tempList.Clear();
+    }
+
+    /// <summary>
+    /// 取消异步加载资源
+    /// </summary>
+    /// <returns></returns>
+    public bool CancleLoad(ResourceObj res)
+    {
+        AsyncLoadResParam para = null;
+        if (m_LoadingAssetDic.TryGetValue(res.m_Crc,out para)&&m_LoadingAssetList[(int)para.m_Priority].Contains(para))
+        {
+            for (int i = para.m_CallBackList.Count-1; i>=0 ; i--)
+            {
+                AsyncCallBack tempCallBack = para.m_CallBackList[i];
+                if (tempCallBack!=null&&res==tempCallBack.m_ResObj)
+                {
+                    tempCallBack.Reset();
+                    m_AsyncCallBackPool.Recycle(tempCallBack);
+                    para.m_CallBackList.Remove(tempCallBack);
+                }
+            }
+            if (para.m_CallBackList.Count<=0)
+            {
+                para.Reset();
+                m_LoadingAssetList[(int)para.m_Priority].Remove(para);
+                m_AsyncLoadResParamPool.Recycle(para);
+                m_LoadingAssetDic.Remove(res.m_Crc);
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>
@@ -537,6 +580,11 @@ public class ResourceManager : Singleton<ResourceManager>
 
         //释放assetbundle引用
         AssetBundleManager.Instance.ReleaseAsset(item);
+
+        //清空资源对应的对象池
+        ObjectManager.Instance.ClearPoolObject(item.m_Crc);
+
+
         if (item.m_Obj != null)
         {
             item.m_Obj = null;
@@ -722,6 +770,15 @@ public class ResourceManager : Singleton<ResourceManager>
                 for (int j = 0; j < callBackList.Count; j++)
                 {
                     AsyncCallBack callBack = callBackList[j];
+
+                    if (callBack != null && callBack.m_DealFinish != null && callBack.m_ResObj != null)
+                    {
+                        ResourceObj tempResObj = callBack.m_ResObj;
+                        tempResObj.m_ResItem = item;
+                        callBack.m_DealFinish(loadingItem.m_Path, tempResObj, tempResObj.m_Param1, tempResObj.m_Param2, tempResObj.m_Param3);
+                        callBack.m_DealFinish = null;
+                    }
+
                     if (callBack != null && callBack.m_DealObjFinish != null)
                     {
                         callBack.m_DealObjFinish(loadingItem.m_Path, obj, callBack.m_Param1, callBack.m_Param2, callBack.m_Param3);

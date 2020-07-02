@@ -2,7 +2,7 @@
 
 public class GameStart : MonoBehaviour
 {
-    private GameObject obj;
+    private GameObject objT;
     void Awake()
     {
         GameObject.DontDestroyOnLoad(gameObject);
@@ -13,12 +13,14 @@ public class GameStart : MonoBehaviour
 
     private void Start()
     {
-        obj = ObjectManager.Instance.InstantiateObject("Assets/GameData/Prefabs/Image.prefab",true);
+         //ObjectManager.Instance.InstantiateObjectAsync("Assets/GameData/Prefabs/Image.prefab", OnLoadFinish, ELoadResPriority.RES_HIGHT,true);
 
+        ObjectManager.Instance.PreLoadGameObject("Assets/GameData/Prefabs/Image.prefab", 20, false);
     }
 
-    void OnLoadFinish(string path, Object obj, object pa1, object pa2, object pa3)
+    void OnLoadFinish(string path, Object obj, object param1=null, object param12 = null, object param13 = null)
     {
+        objT = obj as GameObject;
 
     }
 
@@ -26,17 +28,18 @@ public class GameStart : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            ObjectManager.Instance.ReleaseObject(obj);
-            obj = null;
+            ObjectManager.Instance.ReleaseObject(objT);
+            objT = null;
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            obj = ObjectManager.Instance.InstantiateObject("Assets/GameData/Prefabs/Image.prefab", true);
+            //obj = ObjectManager.Instance.InstantiateObject("Assets/GameData/Prefabs/Image.prefab", true);
+            ObjectManager.Instance.InstantiateObjectAsync("Assets/GameData/Prefabs/Image.prefab", OnLoadFinish, ELoadResPriority.RES_HIGHT, true);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            ObjectManager.Instance.ReleaseObject(obj, 0, true);
-            obj = null;
+            ObjectManager.Instance.ReleaseObject(objT, 0, true);
+            objT = null;
         }
     }
 
