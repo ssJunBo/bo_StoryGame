@@ -629,7 +629,7 @@ public class ResourceManager : Singleton<ResourceManager>
     /// <summary>
     /// 异步加载资源 （仅仅是不需要实例化得资源 比如音频 图片等）
     /// </summary>
-    public void AsyncLoadResouce(string path, OnAsyncObjFinish dealFinish, ELoadResPriority priority, object param1 = null, object param2 = null, object param3 = null, uint crc = 0)
+    public void AsyncLoadResource(string path, OnAsyncObjFinish dealFinish, ELoadResPriority priority, object param1 = null, object param2 = null, object param3 = null, uint crc = 0)
     {
         if (crc == 0)
         {

@@ -12,12 +12,61 @@ public class UIOfflineData : OfflineData
     public Vector3[] m_AnchoredPos;
     public ParticleSystem[] m_Particle;
 
-    public override void BindData()
+    public override void ResetProp()
     {
-        base.BindData();
+        int allPointCount = m_AllPoint.Length;
+        for (int i = 0; i < allPointCount; i++)
+        {
+            RectTransform tempTrs = m_AllPoint[i] as RectTransform;
+            if (tempTrs!=null)
+            {
+                tempTrs.localPosition = m_Pos[i];
+                tempTrs.localRotation = m_Rot[i];
+                tempTrs.localScale = m_Scale[i];
+                tempTrs.anchorMax = m_AnchorMax[i];
+                tempTrs.anchorMin = m_AnchorMin[i];
+                tempTrs.pivot = m_Pivot[i];
+                tempTrs.sizeDelta = m_SizeDelta[i];
+                tempTrs.anchoredPosition3D = m_AnchoredPos[i];
+            }
+
+            if (m_AllPointActive[i])
+            {
+                if (!tempTrs.gameObject.activeSelf)
+                {
+                    tempTrs.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                if (tempTrs.gameObject.activeSelf)
+                {
+                    tempTrs.gameObject.SetActive(false);
+                }
+            }
+            if (tempTrs.childCount > m_AllPointChildCount[i])
+            {
+                int childCount = tempTrs.childCount;
+                for (int j = m_AllPointChildCount[i]; j < childCount; j++)
+                {
+                    GameObject tempObj = tempTrs.GetChild(j).gameObject;
+                    if (!ObjectManager.Instance.IsObjectManagerCreate(tempObj))
+                    {
+                        GameObject.Destroy(tempObj);
+                    }
+                }
+            }
+        }
+
+        int particleCount = m_Particle.Length;
+        for (int i = 0; i < particleCount; i++)
+        {
+            m_Particle[i].Clear(true);
+            m_Particle[i].Play();
+        }
     }
 
-    public override void ResetProp()
+    public override void BindData()
     {
         Transform[] allTrs = gameObject.GetComponentsInChildren<Transform>(true);
         int allTrsCount = allTrs.Length;
