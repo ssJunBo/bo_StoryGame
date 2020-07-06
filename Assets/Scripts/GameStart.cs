@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameStart : MonoBehaviour
 {
@@ -13,12 +14,25 @@ public class GameStart : MonoBehaviour
 
     private void Start()
     {
-         //ObjectManager.Instance.InstantiateObjectAsync("Assets/GameData/Prefabs/Image.prefab", OnLoadFinish, ELoadResPriority.RES_HIGHT,true);
+        //ObjectManager.Instance.InstantiateObjectAsync("Assets/GameData/Prefabs/Image.prefab", OnLoadFinish, ELoadResPriority.RES_HIGHT,true);
+        //ObjectManager.Instance.PreLoadGameObject("Assets/GameData/Prefabs/Image.prefab", 20, false);
 
-        ObjectManager.Instance.PreLoadGameObject("Assets/GameData/Prefabs/Image.prefab", 20, false);
+        UIManager.Instance.Init(transform.Find("UIRoot") as RectTransform,
+            transform.Find("UIRoot/WndRoot") as RectTransform,
+            transform.Find("UIRoot/UICamera").GetComponent<Camera>(),
+            transform.Find("UIRoot/EventSystem").GetComponent<EventSystem>());
+        RegisterUI();
+
+        UIManager.Instance.PopUpWnd("MenuPanel.prefab");
     }
 
-    void OnLoadFinish(string path, Object obj, object param1=null, object param12 = null, object param13 = null)
+    void RegisterUI() 
+    {
+        UIManager.Instance.Register<MenuUI>("MenuPanel.prefab");
+    }
+
+    
+    void OnLoadFinish(string path, Object obj, object param1 = null, object param12 = null, object param13 = null)
     {
         objT = obj as GameObject;
 
@@ -26,21 +40,7 @@ public class GameStart : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ObjectManager.Instance.ReleaseObject(objT);
-            objT = null;
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            //obj = ObjectManager.Instance.InstantiateObject("Assets/GameData/Prefabs/Image.prefab", true);
-            ObjectManager.Instance.InstantiateObjectAsync("Assets/GameData/Prefabs/Image.prefab", OnLoadFinish, ELoadResPriority.RES_HIGHT, true);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            ObjectManager.Instance.ReleaseObject(objT, 0, true);
-            objT = null;
-        }
+
     }
 
     private void OnApplicationQuit()
