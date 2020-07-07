@@ -46,7 +46,9 @@ public class ObjectManager : Singleton<ObjectManager>
                 {
                     GameObject.Destroy(resObj.m_CloneObj);
                     m_ResourceObjDic.Remove(resObj.m_CloneObj.GetInstanceID());
+                    resObj.Reset();
                     m_ResourceObjClassPool.Recycle(resObj);
+                    st.Remove(resObj);
                 }
             }
 

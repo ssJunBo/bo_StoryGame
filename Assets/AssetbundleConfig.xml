@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AssetBundleConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ABList Path="Assets/GameData/Data/ABData/AssetBundleConfig.bytes" Crc="2592780836" ABName="assetbundleconfig" AssetName="AssetBundleConfig.bytes" />
-  <ABList Path="Assets/GameData/Prefabs/GameObject.prefab" Crc="245218278" ABName="gameobject" AssetName="GameObject.prefab" />
+  <ABList Path="Assets/GameData/Prefabs/GameStart.prefab" Crc="2067334258" ABName="gamestart" AssetName="GameStart.prefab" />
   <ABList Path="Assets/GameData/Prefabs/Image.prefab" Crc="3457475987" ABName="image" AssetName="Image.prefab" />
+  <ABList Path="Assets/GameData/Prefabs/UGUI/Panel/LoadingPanel.prefab" Crc="155217535" ABName="loadingpanel" AssetName="LoadingPanel.prefab" />
+  <ABList Path="Assets/GameData/Prefabs/UGUI/Panel/MenuPanel.prefab" Crc="2521868572" ABName="menupanel" AssetName="MenuPanel.prefab" />
+  <ABList Path="Assets/GameData/Prefabs/Effect/Particle1.prefab" Crc="3198229541" ABName="particle1" AssetName="Particle1.prefab" />
   <ABList Path="Assets/GameData/Shaders/NewSurfaceShader.shader" Crc="1407825588" ABName="shader" AssetName="NewSurfaceShader.shader" />
   <ABList Path="Assets/GameData/Shaders/Skybox.shader" Crc="1543336258" ABName="shader" AssetName="Skybox.shader" />
   <ABList Path="Assets/GameData/Shaders/Water.shader" Crc="2063203432" ABName="shader" AssetName="Water.shader" />

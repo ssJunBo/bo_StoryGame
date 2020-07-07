@@ -7,5 +7,5 @@ public class MenuPanel : MonoBehaviour {
 	public Button m_LoadButton;
 	public Button m_ExitButton;
 
-
+    public AudioSource m_Audio;
 }

@@ -10,7 +10,6 @@ public enum EUIMshID
 
 public class UIManager : Singleton<UIManager>
 {
-
     //UI节点
     private RectTransform m_UiRoot;
     //窗口节点
@@ -70,6 +69,9 @@ public class UIManager : Singleton<UIManager>
         m_EventSystem.firstSelectedGameObject = obj;
     }
 
+    /// <summary>
+    /// 窗口的更新
+    /// </summary>
     public void OnUpdate()
     {
         for (int i = 0; i < m_WindowList.Count; i++)

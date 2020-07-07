@@ -3,44 +3,61 @@ using UnityEngine.EventSystems;
 
 public class GameStart : MonoBehaviour
 {
+    public bool LoadFromAssetBundle;
+
     private GameObject objT;
     void Awake()
     {
+        ResourceManager.Instance.m_LoadFromAssetBundle = LoadFromAssetBundle;
+
         GameObject.DontDestroyOnLoad(gameObject);
-        AssetBundleManager.Instance.LoadAssetBundleConfig();
+        
+        //从ab包加载就要先加载配置表
+        if (ResourceManager.Instance.m_LoadFromAssetBundle)
+        {
+            AssetBundleManager.Instance.LoadAssetBundleConfig();
+        }
+
         ResourceManager.Instance.Init(this);
         ObjectManager.Instance.Init(transform.Find("RecyclePoolTrs"), transform.Find("SceneTrs"));
     }
 
     private void Start()
     {
-        //ObjectManager.Instance.InstantiateObjectAsync("Assets/GameData/Prefabs/Image.prefab", OnLoadFinish, ELoadResPriority.RES_HIGHT,true);
-        //ObjectManager.Instance.PreLoadGameObject("Assets/GameData/Prefabs/Image.prefab", 20, false);
-
         UIManager.Instance.Init(transform.Find("UIRoot") as RectTransform,
             transform.Find("UIRoot/WndRoot") as RectTransform,
             transform.Find("UIRoot/UICamera").GetComponent<Camera>(),
             transform.Find("UIRoot/EventSystem").GetComponent<EventSystem>());
+
         RegisterUI();
 
-        UIManager.Instance.PopUpWnd("MenuPanel.prefab");
+        GameMapManager.Instance.Init(this);
+
+        ObjectManager.Instance.PreLoadGameObject(ConStr.ATTACK, 5);
+
+
+        //ResourceManager.Instance.PreloadRes(ConStr.MENUSOUND);
+        //AudioClip clip= ResourceManager.Instance.LoadResouce<AudioClip>(ConStr.MENUSOUND);
+        //ResourceManager.Instance.ReleaseResource(clip);
+
+
+
+        //GameObject obj = ObjectManager.Instance.InstantiateObject(ConStr.ATTACK, true, false);
+        //ObjectManager.Instance.ReleaseObject(obj);
+        //obj = null;
+
+        GameMapManager.Instance.LoadScene(ConStr.MENUSCENE);
     }
 
-    void RegisterUI() 
+    void RegisterUI()
     {
-        UIManager.Instance.Register<MenuUI>("MenuPanel.prefab");
-    }
-
-    
-    void OnLoadFinish(string path, Object obj, object param1 = null, object param12 = null, object param13 = null)
-    {
-        objT = obj as GameObject;
-
+        UIManager.Instance.Register<MenuUI>(ConStr.MENUPANEL);
+        UIManager.Instance.Register<LoadingUI>(ConStr.LOADINGPANEL);
     }
 
     private void Update()
     {
-
+        UIManager.Instance.OnUpdate();
     }
 
     private void OnApplicationQuit()

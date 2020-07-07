@@ -124,6 +124,10 @@ public class ResourceManager : Singleton<ResourceManager>
     //最长连续卡着加载资源的时间 单位微秒
     private const long MAXLOADRESTIME = 200000;
 
+    //最大缓存个数 中配 500 高配 1000 低配 200 复杂处理（搜索 unity3d获取内存大小）
+    private const int MAXCACHECOUNT = 500; 
+
+
     public void Init(MonoBehaviour mono)
     {
         for (int i = 0; i < (int)ELoadResPriority.RES_NUM; i++)
@@ -171,19 +175,19 @@ public class ResourceManager : Singleton<ResourceManager>
     public bool CancleLoad(ResourceObj res)
     {
         AsyncLoadResParam para = null;
-        if (m_LoadingAssetDic.TryGetValue(res.m_Crc,out para)&&m_LoadingAssetList[(int)para.m_Priority].Contains(para))
+        if (m_LoadingAssetDic.TryGetValue(res.m_Crc, out para) && m_LoadingAssetList[(int)para.m_Priority].Contains(para))
         {
-            for (int i = para.m_CallBackList.Count-1; i>=0 ; i--)
+            for (int i = para.m_CallBackList.Count - 1; i >= 0; i--)
             {
                 AsyncCallBack tempCallBack = para.m_CallBackList[i];
-                if (tempCallBack!=null&&res==tempCallBack.m_ResObj)
+                if (tempCallBack != null && res == tempCallBack.m_ResObj)
                 {
                     tempCallBack.Reset();
                     m_AsyncCallBackPool.Recycle(tempCallBack);
                     para.m_CallBackList.Remove(tempCallBack);
                 }
             }
-            if (para.m_CallBackList.Count<=0)
+            if (para.m_CallBackList.Count <= 0)
             {
                 para.Reset();
                 m_LoadingAssetList[(int)para.m_Priority].Remove(para);
@@ -272,12 +276,16 @@ public class ResourceManager : Singleton<ResourceManager>
         if (!m_LoadFromAssetBundle)
         {
             item = AssetBundleManager.Instance.FindResouceItem(crc);
-            if (item.m_Obj != null)
+            if (item != null && item.m_Obj != null)
             {
                 obj = item.m_Obj;
             }
             else
             {
+                if (item == null)
+                {
+                    item = new ResourceItem();
+                }
                 obj = LoadAssetByEditor<Object>(path);
             }
 
@@ -332,13 +340,13 @@ public class ResourceManager : Singleton<ResourceManager>
         if (!m_LoadFromAssetBundle)
         {
             item = AssetBundleManager.Instance.FindResouceItem(resObj.m_Crc);
-            if (item!=null&& item != null)
+            if (item != null && item != null)
             {
                 obj = item.m_Obj as Object;
             }
             else
             {
-                if (item==null)
+                if (item == null)
                 {
                     item = new ResourceItem();
                     item.m_Crc = crc;
@@ -394,12 +402,16 @@ public class ResourceManager : Singleton<ResourceManager>
         if (!m_LoadFromAssetBundle)
         {
             item = AssetBundleManager.Instance.FindResouceItem(crc);
-            if (item.m_Obj != null)
+            if (item != null && item.m_Obj != null)
             {
                 obj = item.m_Obj as T;
             }
             else
             {
+                if (item == null)
+                {
+                    item = new ResourceItem();
+                }
                 obj = LoadAssetByEditor<T>(path);
             }
 
@@ -548,16 +560,15 @@ public class ResourceManager : Singleton<ResourceManager>
     /// </summary>
     protected void WashOut()
     {
-        //当前内存使用大于百分之80 来进行清除最早没用的资源
-        //{
-        //    if (m_NoRefrenceAssetMapList.Size() <= 0)
-        //    {
-        //        break;
-        //        ResouceItem item = m_NoRefrenceAssetMapList.Back();
-        //        DestroyResouceItem(item,true);
-        //        m_NoRefrenceAssetMapList.Pop);
-        //    }
-        //}
+        //当大于缓存个数时进行一半释放
+        while (m_NoRefrenceAssetMapList.Size() >= MAXCACHECOUNT)
+        {
+            for (int i = 0; i < MAXCACHECOUNT / 2; i++)
+            {
+                ResourceItem item = m_NoRefrenceAssetMapList.Back();
+                DestroyResourceItem(item, true);
+            }
+        }
     }
 
     /// <summary>
@@ -574,7 +585,7 @@ public class ResourceManager : Singleton<ResourceManager>
 
         if (!destroyCache)
         {
-            //m_NoRefrenceAssetMapList.InsertToHead(item);
+            m_NoRefrenceAssetMapList.InsertToHead(item);
             return;
         }
 
@@ -582,6 +593,8 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             return;
         }
+
+        m_NoRefrenceAssetMapList.Remove(item);
 
         //释放assetbundle引用
         AssetBundleManager.Instance.ReleaseAsset(item);
@@ -745,6 +758,11 @@ public class ResourceManager : Singleton<ResourceManager>
                     //模拟异步加载
                     yield return new WaitForSeconds(0.5f);
                     item = AssetBundleManager.Instance.FindResouceItem(loadingItem.m_Crc);
+                    if (item == null)
+                    {
+                        item = new ResourceItem();
+                        item.m_Crc = loadingItem.m_Crc;
+                    }
                 }
 #endif
                 if (obj == null)

@@ -1,31 +1,34 @@
 ManifestFileVersion: 0
-CRC: 1301232546
+CRC: 3264099019
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ce2a60b4342d799943d227bb48189a1f
+    Hash: a134d97840db64e0593292d370967d05
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 46de9c678b7611379449ce69d44a9927
+    Hash: 6715959e20ce9b4be84d8549278f265a
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 96
+  Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: efc23a33bb8de0446871a6088077a580, type: 3}
+  Script: {fileID: 11500000, guid: d1d65b8e176f8cd4280f45171a1092ea, type: 3}
 - Class: 115
   Script: {instanceID: 0}
-- Class: 213
+- Class: 198
   Script: {instanceID: 0}
-- Class: 222
+- Class: 199
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/GameData/Prefabs/Image.prefab
-- Assets/Resources/kouhao.jpg
+- Assets/GameData/Prefabs/Effect/Particle1.prefab
 Dependencies: []

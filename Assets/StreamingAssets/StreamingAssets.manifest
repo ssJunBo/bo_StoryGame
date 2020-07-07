@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3651326916
+CRC: 2681250902
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -12,8 +12,17 @@ AssetBundleManifest:
       Name: assetbundleconfig
       Dependencies: {}
     Info_3:
-      Name: gameobject
+      Name: particle1
       Dependencies: {}
     Info_4:
+      Name: gamestart
+      Dependencies: {}
+    Info_5:
       Name: image
+      Dependencies: {}
+    Info_6:
+      Name: loadingpanel
+      Dependencies: {}
+    Info_7:
+      Name: menupanel
       Dependencies: {}
