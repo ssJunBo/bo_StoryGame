@@ -1,0 +1,9 @@
+{
+    "name": "UIManager",
+    "references": [
+        "Resource",
+        "Base"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

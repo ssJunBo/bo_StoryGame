@@ -1,0 +1,8 @@
+{
+    "name": "Resource",
+    "references": [
+        "Base"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

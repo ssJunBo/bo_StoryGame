@@ -77,15 +77,18 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFiltering: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -107,7 +110,32 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &497515595 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1487107241525970, guid: 87ecbd5e96a942f49a9da886262aad5e,
+    type: 2}
+  m_PrefabInternal: {fileID: 827100615}
+--- !u!114 &497515597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 497515595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0750ff29a6d2e3c4ab916b4f8919e3c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartButton: {fileID: 0}
+  m_LoadButton: {fileID: 0}
+  m_ExitButton: {fileID: 0}
+  m_Audio: {fileID: 0}
+  m_Test1: {fileID: 0}
+  m_Test2: {fileID: 0}
+  m_Test3: {fileID: 0}
 --- !u!1001 &827100615
 Prefab:
   m_ObjectHideFlags: 0
@@ -150,7 +178,12 @@ Prefab:
     - target: {fileID: 114204457144539978, guid: 87ecbd5e96a942f49a9da886262aad5e,
         type: 2}
       propertyPath: LoadFromAssetBundle
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114204457144539978, guid: 87ecbd5e96a942f49a9da886262aad5e,
+        type: 2}
+      propertyPath: img
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87ecbd5e96a942f49a9da886262aad5e, type: 2}
