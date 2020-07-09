@@ -21,7 +21,7 @@ public class UIManager : Singleton<UIManager>
     //屏幕的宽高比
     private float m_CanvasRate = 0;
 
-    private const string UIPREFABPATH = "Assets/GameData/Prefabs/UGUI/Panel/";
+    private  string m_UIPrefabPath = "Assets/GameData/Prefabs/UGUI/Panel/";
     //注册的字典
     private Dictionary<string, System.Type> m_RegisterDic = new Dictionary<string, System.Type>();
 
@@ -81,6 +81,15 @@ public class UIManager : Singleton<UIManager>
                 m_WindowList[i].OnUpdate();
             }
         }
+    }
+
+    /// <summary>
+    /// 设置所有节目UI路径
+    /// </summary>
+    /// <param name="path"></param>
+    public void SetUIPrefabPath(string path)
+    {
+        m_UIPrefabPath = path;
     }
 
     /// <summary>
@@ -150,7 +159,7 @@ public class UIManager : Singleton<UIManager>
                 Debug.LogError("找不到窗口对应的脚本，窗口名是：" + wndName);
                 return null;
             }
-            GameObject wndObj = ObjectManager.Instance.InstantiateObject(UIPREFABPATH + wndName, false, false);
+            GameObject wndObj = ObjectManager.Instance.InstantiateObject(m_UIPrefabPath + wndName, false, false);
             if (wndObj == null)
             {
                 Debug.Log("创建创建口Prefab失败：" + wndName);

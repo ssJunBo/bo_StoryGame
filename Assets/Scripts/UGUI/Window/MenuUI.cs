@@ -44,7 +44,6 @@ public class MenuUI : Window
         if (obj != null)
         {
             Sprite sp = obj as Sprite;
-            Debug.Log("sp " + sp.GetType());
             m_MainPanel.m_Test3.sprite = sp;
             Debug.Log("图片3异步加载出来了！");
         }

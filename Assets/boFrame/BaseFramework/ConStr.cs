@@ -5,7 +5,7 @@ using UnityEngine;
 public class ConStr  {
 
     //界面名称
-    public const string LOADINGPANEL = "LoadingPanel.prefab";
+    public const string LOADINGPANEL = "LoadingPanel.prefab"; 
     public const string MENUPANEL = "MenuPanel.prefab";
 
 

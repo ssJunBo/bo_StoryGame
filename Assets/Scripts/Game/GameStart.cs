@@ -26,27 +26,16 @@ public class GameStart : MonoSingleton<GameStart>
 
     private void Start()
     {
+        LoadConfiger();
+
         UIManager.Instance.Init(transform.Find("UIRoot") as RectTransform,
             transform.Find("UIRoot/WndRoot") as RectTransform,
             transform.Find("UIRoot/UICamera").GetComponent<Camera>(),
             transform.Find("UIRoot/EventSystem").GetComponent<EventSystem>());
 
         RegisterUI();
-
+       
         GameMapManager.Instance.Init(this);
-
-        ObjectManager.Instance.PreLoadGameObject(ConStr.ATTACK, 5);
-
-
-        //ResourceManager.Instance.PreloadRes(ConStr.MENUSOUND);
-        //AudioClip clip= ResourceManager.Instance.LoadResouce<AudioClip>(ConStr.MENUSOUND);
-        //ResourceManager.Instance.ReleaseResource(clip);
-
-        //GameObject obj = ObjectManager.Instance.InstantiateObject(ConStr.ATTACK, true, false);
-        //ObjectManager.Instance.ReleaseObject(obj);
-        //obj = null;
-
-        //ObjectManager.Instance.InstantiateObject("Assets/GameData/Prefabs/ABABABA.prefab");
 
         GameMapManager.Instance.Init(this);
         GameMapManager.Instance.LoadScene(ConStr.MENUSCENE);
@@ -58,10 +47,16 @@ public class GameStart : MonoSingleton<GameStart>
         UIManager.Instance.Register<LoadingUI>(ConStr.LOADINGPANEL);
     }
 
+    void LoadConfiger()
+    {
+
+    }
+
     private void Update()
     {
         UIManager.Instance.OnUpdate();
     }
+
 
     private void OnApplicationQuit()
     {

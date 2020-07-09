@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AssetBundleManager : Singleton<AssetBundleManager>
 {
-
+    protected string m_ABConfigABName = "assetbundleconfig";
     //资源关系依赖配表 可以根据crc来找到对应的资源块
     protected Dictionary<uint, ResourceItem> m_ResouceItemDic = new Dictionary<uint, ResourceItem>();
     //储存已加载的ab包，key为crc
@@ -13,16 +13,29 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
     //AssetBundleItem类对象池
     protected ClassObjectPool<AssetBundleItem> m_AssetBundleItemPool = ObjectManager.Instance.GetOrCreateClassPool<AssetBundleItem>(500);
 
+    protected string ABLoadPath
+    {
+        get
+        {
+            return Application.streamingAssetsPath + "/";
+        }
+    }
+
     /// <summary>
     /// 加载ab配置表
     /// </summary>
     /// <returns></returns>
     public bool LoadAssetBundleConfig()
     {
+#if UNITY_EDITOR
+        if (!ResourceManager.Instance.m_LoadFromAssetBundle)
+            return false;
+#endif
+
         m_ResouceItemDic.Clear();
-        string configPath = Application.streamingAssetsPath + "/assetbundleconfig";
+        string configPath = ABLoadPath + m_ABConfigABName;
         AssetBundle configAB = AssetBundle.LoadFromFile(configPath);
-        TextAsset textAsset = configAB.LoadAsset<TextAsset>("assetbundleconfig");
+        TextAsset textAsset = configAB.LoadAsset<TextAsset>(m_ABConfigABName);
         if (textAsset == null)
         {
             Debug.LogError("AssetBundleConfig is no exist !");
@@ -95,11 +108,8 @@ public class AssetBundleManager : Singleton<AssetBundleManager>
         if (!m_AssetBundleItemDic.TryGetValue(crc, out item))
         {
             AssetBundle assetBundle = null;
-            string fullPath = Application.streamingAssetsPath + "/" + abName;
-            if (File.Exists(fullPath))
-            {
-                assetBundle = AssetBundle.LoadFromFile(fullPath);
-            }
+            string fullPath = ABLoadPath + abName;
+            assetBundle = AssetBundle.LoadFromFile(fullPath);
             if (assetBundle == null)
             {
                 Debug.LogError(" Load AssetBundle Error : " + fullPath);
