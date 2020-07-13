@@ -20,6 +20,8 @@ public class MonsterData : ExcelBase
             monster.OutLook = "Assets/GameData/Prefabs/Attack.prefab";
             monster.Rare = 2;
             monster.Height = i + 2;
+            monster.Level = i + 3;
+
             AllMonster.Add(monster);
         }
     }
@@ -48,7 +50,8 @@ public class MonsterData : ExcelBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public MonsterBase FindMonsterById(int id) {
+    public MonsterBase FindMonsterById(int id)
+    {
         return m_AllMonsterDic[id];
     }
 
@@ -74,7 +77,7 @@ public class MonsterBase
     public string OutLook { get; set; }
     //怪物等级
     [XmlAttribute("Level")]
-    public string Level { get; set; }
+    public int Level { get; set; }
     //怪物稀有度
     [XmlAttribute("Rare")]
     public int Rare { get; set; }

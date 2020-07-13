@@ -265,10 +265,10 @@ public class DataEditor
             + testInfo.IsA + "     " + testInfo.Heigh + "     " + testInfo.TestType);
     }
 
-    [MenuItem("Tools/测试/Excel转Xml")]
+    [MenuItem("Tools/测试Excel转Xml")]
     public static void ExcelToXml()
     {
-        string name = "MonsterData.xml";
+        string name = "MonsterData";
         string className = "";
         string xmlName = "";
         string excelName = "";
@@ -276,7 +276,7 @@ public class DataEditor
         Dictionary<string, SheetClass> allSheetClassDic = ReadReg(name, ref excelName, ref xmlName, ref className);
 
         //第二部 读取excel里面的数据
-        string excelPath = ExcelPath + name;
+        string excelPath = ExcelPath + excelName;
         Dictionary<string, SheetData> sheetDataDic = new Dictionary<string, SheetData>();
         try
         {
@@ -305,7 +305,11 @@ public class DataEditor
                             for (int n = 0; n < colCount; n++)
                             {
                                 ExcelRange range = worksheet.Cells[m + 1, n + 1];
-                                string value = range.Value.ToString().Trim();
+                                string value = null;
+                                if (range.Value!=null)
+                                {
+                                    value = range.Value.ToString().Trim();
+                                }
                                 string colValue = worksheet.Cells[1, n + 1].Value.ToString().Trim();
                                 rowData.RowDataDic.Add(GetNameFromCol(sheetClass.VarList, colValue), value);
                             }
@@ -349,7 +353,6 @@ public class DataEditor
     {
         object item = CreateClass(sheetClass.Name);//只是为了得到变量类型
         object list = CreateList(item.GetType());
-
         for (int i = 0; i < sheetData.AllData.Count; i++)
         {
             object addItem = CreateClass(sheetClass.Name);
@@ -371,11 +374,8 @@ public class DataEditor
                 }
             }
             list.GetType().InvokeMember("Add", BindingFlags.Default | BindingFlags.InvokeMethod, null, list, new object[] { addItem });
-
         }
-
         objClass.GetType().GetProperty(sheetClass.ParentVar.Name).SetValue(objClass, list, null);
-
     }
 
     /// <summary>
@@ -478,7 +478,7 @@ public class DataEditor
         string regPath = RegPath + name + ".xml";
         if (!File.Exists(regPath))
         {
-            Debug.LogError("此数据不存在配置转换xml: " + name);
+            Debug.LogError("此数据不存在配置转换xml: " + name+" : 路径"+ regPath);
         }
         XmlDocument xml = new XmlDocument();
         XmlReader reader = XmlReader.Create(regPath);
