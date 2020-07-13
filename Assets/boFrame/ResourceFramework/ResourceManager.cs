@@ -101,32 +101,26 @@ public delegate void OnAsyncFinish(string path, ResourceObj objObj, object param
 
 public class ResourceManager : Singleton<ResourceManager>
 {
+
     protected long m_Guid = 0;
     public bool m_LoadFromAssetBundle = false;
     //缓存使用的资源列表 
     public Dictionary<uint, ResourceItem> AssetDic = new Dictionary<uint, ResourceItem>();
     //缓存应用为零的资源列表，达到缓存最大的时 释放这个列表里面最早没用的资源
     protected CMapList<ResourceItem> m_NoRefrenceAssetMapList = new CMapList<ResourceItem>();
-
     //中间类 回调类 的类对象池
     protected ClassObjectPool<AsyncLoadResParam> m_AsyncLoadResParamPool = new ClassObjectPool<AsyncLoadResParam>(50);
-
     protected ClassObjectPool<AsyncCallBack> m_AsyncCallBackPool = new ClassObjectPool<AsyncCallBack>(100);
-
     //Mono脚本
     protected MonoBehaviour m_SatrtMono;
     //正在异步加载的资源列表
     protected List<AsyncLoadResParam>[] m_LoadingAssetList = new List<AsyncLoadResParam>[(int)ELoadResPriority.RES_NUM];
-
     //正在异步加载得dic
     protected Dictionary<uint, AsyncLoadResParam> m_LoadingAssetDic = new Dictionary<uint, AsyncLoadResParam>();
-
     //最长连续卡着加载资源的时间 单位微秒
     private const long MAXLOADRESTIME = 200000;
-
     //最大缓存个数 中配 500 高配 1000 低配 200 复杂处理（搜索 unity3d获取内存大小）
     private const int MAXCACHECOUNT = 500; 
-
 
     public void Init(MonoBehaviour mono)
     {
@@ -285,6 +279,7 @@ public class ResourceManager : Singleton<ResourceManager>
                 if (item == null)
                 {
                     item = new ResourceItem();
+                    item.m_Crc = crc;
                 }
                 obj = LoadAssetByEditor<Object>(path);
             }
@@ -412,6 +407,15 @@ public class ResourceManager : Singleton<ResourceManager>
                 {
                     obj = item.m_AssetBundle.LoadAsset<T>(item.m_AssetName);
                 }
+            }
+            else
+            {
+                if (item==null)
+                {
+                    item = new ResourceItem();
+                    item.m_Crc = crc;
+                }
+                obj = LoadAssetByEditor<T>(path);
             }
         }
 #endif

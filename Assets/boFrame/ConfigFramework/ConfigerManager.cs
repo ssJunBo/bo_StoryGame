@@ -58,7 +58,7 @@ public class ConfigerManager : Singleton<ConfigerManager>
             return null;
 
         ExcelBase excelBase = null;
-        if (m_AllExcelData.TryGetValue(path,out excelBase))
+        if (m_AllExcelData.TryGetValue(path, out excelBase))
         {
             return excelBase as T;
         }
@@ -73,4 +73,8 @@ public class ConfigerManager : Singleton<ConfigerManager>
 /// <summary>
 /// 配置表路径
 /// </summary>
-public class CFG { }
+public class CFG
+{
+    public const string TABLE_MONSTER = "Assets/GameData/Data/Binary/MonsterData.bytes";
+    public const string TABLE_BUFF= "Assets/GameData/Data/Binary/BuffData.bytes";
+}

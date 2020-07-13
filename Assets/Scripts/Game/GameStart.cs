@@ -36,8 +36,6 @@ public class GameStart : MonoSingleton<GameStart>
         RegisterUI();
        
         GameMapManager.Instance.Init(this);
-
-        GameMapManager.Instance.Init(this);
         GameMapManager.Instance.LoadScene(ConStr.MENUSCENE);
     }
 
@@ -49,7 +47,8 @@ public class GameStart : MonoSingleton<GameStart>
 
     void LoadConfiger()
     {
-
+        ConfigerManager.Instance.LoadData<BuffData>(CFG.TABLE_BUFF);
+        ConfigerManager.Instance.LoadData<MonsterData>(CFG.TABLE_MONSTER);
     }
 
     private void Update()

@@ -109,7 +109,7 @@ public class BundleEditor
         EditorUtility.ClearProgressBar();
     }
 
-    [MenuItem("Tools/打包到StreamingAsset下")]//编辑器下使用
+    [MenuItem("Tools/打包到StreamingAssets下")]//编辑器下使用
     public static void BuildAB()
     {
         m_AllFileDir.Clear();
@@ -196,7 +196,7 @@ public class BundleEditor
         EditorUtility.ClearProgressBar();
     }
 
-    [MenuItem("Tools/删除StreamingAsset下ab包")]//编辑器下使用
+    [MenuItem("Tools/删除StreamingAssets下ab包")]//编辑器下使用
     public static void DeleteLocalAB()
     {
         string[] allBundlesName = AssetDatabase.GetAllAssetBundleNames();

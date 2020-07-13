@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 417729044
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 92b918d1031c169727bde84a768a9129
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameData/Sounds/menusound.mp3
+- Assets/GameData/Sounds/senlin.mp3
+- Assets/GameData/Sounds/kanong.mp3
+Dependencies: []
