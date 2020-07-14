@@ -11,7 +11,8 @@ public class BundleEditor
 
     private static string m_BundleTargetLoaclPath = Application.streamingAssetsPath;
     private static string ABCONFIGPATH = "Assets/boFrame.Editor/Editor/Resource/ABConfig.asset";
-    private static string ABBYTEPATH = "Assets/GameData/Data/ABData/AssetBundleConfig.bytes";
+    private static string ABBYTEPATH =BoConfig.GetBoFrame().m_ABBytePath;
+    //"Assets/GameData/Data/ABData/AssetBundleConfig.bytes";
 
     //key 是ab包名  value 是路径  所有文件夹ab包dic
     private static Dictionary<string, string> m_AllFileDir = new Dictionary<string, string>();
@@ -25,6 +26,7 @@ public class BundleEditor
     //给外部调用 打包使用
     public static void Build()
     {
+        DataEditor.AllXmlToBinary();
         m_AllFileDir.Clear();
         m_AllFileAB.Clear();
         m_AllPrefabDir.Clear();
@@ -109,7 +111,7 @@ public class BundleEditor
         EditorUtility.ClearProgressBar();
     }
 
-    [MenuItem("Tools/打包到StreamingAssets下")]//编辑器下使用
+    [MenuItem("Tools/AB包/打ab包到StreamingAssets下")]//编辑器下使用
     public static void BuildAB()
     {
         m_AllFileDir.Clear();
@@ -196,7 +198,7 @@ public class BundleEditor
         EditorUtility.ClearProgressBar();
     }
 
-    [MenuItem("Tools/删除StreamingAssets下ab包")]//编辑器下使用
+    [MenuItem("Tools/AB包/删除StreamingAssets下ab包")]//编辑器下使用
     public static void DeleteLocalAB()
     {
         string[] allBundlesName = AssetDatabase.GetAllAssetBundleNames();
@@ -360,6 +362,10 @@ public class BundleEditor
                 if (File.Exists(files[i].FullName))
                 {
                     File.Delete(files[i].FullName);
+                }
+                if (File.Exists(files[i].FullName+ ".manifest"))
+                {
+                    File.Delete(files[i].FullName + ".manifest");
                 }
             }
         }

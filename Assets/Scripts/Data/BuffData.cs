@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class BuffData : ExcelBase
 {
+#if UNITY_EDITOR
     public override void Construction()
     {
         AllBuffList = new List<BuffBase>();
@@ -57,6 +58,7 @@ public class BuffData : ExcelBase
             MonsterBuffList.Add(buff);
         }
     }
+#endif
 
     public override void Init()
     {

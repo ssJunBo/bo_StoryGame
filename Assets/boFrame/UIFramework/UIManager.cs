@@ -47,6 +47,15 @@ public class UIManager : Singleton<UIManager>
     }
 
     /// <summary>
+    /// 设置所有节目UI路径
+    /// </summary>
+    /// <param name="path"></param>
+    public void SetUIPrefabPath(string path)
+    {
+        m_UIPrefabPath = path;
+    }
+
+    /// <summary>
     /// 显示或者隐藏所有UI
     /// </summary>
     public void ShowOrHideUI(bool show)
@@ -81,15 +90,6 @@ public class UIManager : Singleton<UIManager>
                 m_WindowList[i].OnUpdate();
             }
         }
-    }
-
-    /// <summary>
-    /// 设置所有节目UI路径
-    /// </summary>
-    /// <param name="path"></param>
-    public void SetUIPrefabPath(string path)
-    {
-        m_UIPrefabPath = path;
     }
 
     /// <summary>

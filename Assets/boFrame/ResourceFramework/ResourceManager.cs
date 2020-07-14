@@ -272,7 +272,7 @@ public class ResourceManager : Singleton<ResourceManager>
             item = AssetBundleManager.Instance.FindResourceItem(crc);
             if (item != null && item.m_Obj != null)
             {
-                obj = item.m_Obj;
+                obj = item.m_Obj as Object;
             }
             else
             {
