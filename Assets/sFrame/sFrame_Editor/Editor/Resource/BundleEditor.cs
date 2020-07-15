@@ -11,7 +11,7 @@ public class BundleEditor
 
     private static string m_BundleTargetLoaclPath = Application.streamingAssetsPath;
     private static string ABCONFIGPATH = "Assets/sFrame/sFrame_Editor/Editor/Resource/ABConfig.asset";
-    private static string ABBYTEPATH =BoConfig.GetBoFrame().m_ABBytePath;
+    private static string ABBYTEPATH = BoConfig.GetBoFrame().m_ABBytePath;
     //"Assets/GameData/Data/ABData/AssetBundleConfig.bytes";
 
     //key 是ab包名  value 是路径  所有文件夹ab包dic
@@ -249,10 +249,8 @@ public class BundleEditor
                     continue;
 
                 Debug.Log("此ab包" + allBundles[i] + " 下面包含的资源文件路径：" + allBundlePath[j]);
-                if (ValidPath(allBundlePath[j]))
-                {
-                    resPathDic.Add(allBundlePath[j], allBundles[i]);
-                }
+                resPathDic.Add(allBundlePath[j], allBundles[i]);
+
             }
         }
 
@@ -284,6 +282,8 @@ public class BundleEditor
         config.ABList = new List<ABBase>();
         foreach (string path in resPathDic.Keys)
         {
+            if (ValidPath(path)) continue;
+
             ABBase abBase = new ABBase();
             abBase.Path = path;
             abBase.Crc = CRC32.GetCRC32(path);
@@ -363,7 +363,7 @@ public class BundleEditor
                 {
                     File.Delete(files[i].FullName);
                 }
-                if (File.Exists(files[i].FullName+ ".manifest"))
+                if (File.Exists(files[i].FullName + ".manifest"))
                 {
                     File.Delete(files[i].FullName + ".manifest");
                 }

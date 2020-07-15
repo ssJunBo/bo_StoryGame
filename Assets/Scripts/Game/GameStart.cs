@@ -35,22 +35,22 @@ public class GameStart : MonoSingleton<GameStart>
 
         RegisterUI();
 
-        //GameMapManager.Instance.Init(this);
-        //GameMapManager.Instance.LoadScene(ConStr.MENUSCENE);
+        GameMapManager.Instance.Init(this);
+        GameMapManager.Instance.LoadScene(ConStr.MENUSCENE);
     }
 
     //注册ui窗口
     void RegisterUI()
     {
-        //UIManager.Instance.Register<MenuUI>(ConStr.MENUPANEL);
-        //UIManager.Instance.Register<LoadingUI>(ConStr.LOADINGPANEL);
+        UIManager.Instance.Register<MenuUI>(ConStr.MENUPANEL);
+        UIManager.Instance.Register<LoadingUI>(ConStr.LOADINGPANEL);
     }
 
     //加载配置表
     void LoadConfiger()
     {
-        //ConfigerManager.Instance.LoadData<BuffData>(CFG.TABLE_BUFF);
-        // ConfigerManager.Instance.LoadData<MonsterData>(CFG.TABLE_MONSTER);
+        ConfigerManager.Instance.LoadData<BuffData>(CFG.TABLE_BUFF);
+        ConfigerManager.Instance.LoadData<MonsterData>(CFG.TABLE_MONSTER);
     }
 
     private void Update()

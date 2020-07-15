@@ -1,0 +1,34 @@
+ManifestFileVersion: 0
+CRC: 228312586
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: shader
+      Dependencies: {}
+    Info_1:
+      Name: sound
+      Dependencies: {}
+    Info_2:
+      Name: ugui
+      Dependencies: {}
+    Info_3:
+      Name: bytes
+      Dependencies: {}
+    Info_4:
+      Name: attack
+      Dependencies: {}
+    Info_5:
+      Name: particle1
+      Dependencies: {}
+    Info_6:
+      Name: gamestart
+      Dependencies: {}
+    Info_7:
+      Name: loadingpanel
+      Dependencies: {}
+    Info_8:
+      Name: menupanel
+      Dependencies: {}
+    Info_9:
+      Name: assetbundleconfig
+      Dependencies: {}

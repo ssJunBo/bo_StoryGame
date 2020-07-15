@@ -1,0 +1,17 @@
+ManifestFileVersion: 0
+CRC: 3685854393
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 78c841a4231b4a2794c90bf4cb79cc2e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameData/Data/Binary/BuffData.bytes
+- Assets/GameData/Data/Binary/MonsterData.bytes
+Dependencies: []

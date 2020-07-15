@@ -6,8 +6,7 @@ using System.IO;
 
 public class BuildApp
 {
-    private static string m_AppName = BoConfig.GetBoFrame().m_AppName;//"bo_StoryGame";
-
+    private static string m_AppName = PlayerSettings.productName;
     public static string m_AndroidPath = Application.dataPath + "/../BuildTarget/Android/";
     public static string m_IOSPath = Application.dataPath + "/../BuildTarget/IOS/";
     public static string m_WindowsPath = Application.dataPath + "/../BuildTarget/Windows/";
