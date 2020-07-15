@@ -1,0 +1,30 @@
+ManifestFileVersion: 0
+CRC: 3299260628
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: de7b1a81937b1d1ef9a7c05bfcec01a0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c00ff448295c0af0585b7d324c9d8ca9
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+Assets:
+- Assets/GameData/Prefabs/UGUI/Panel/TalkPanel.prefab
+Dependencies: []

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 228312586
+CRC: 1748262196
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -25,10 +25,17 @@ AssetBundleManifest:
       Dependencies: {}
     Info_7:
       Name: loadingpanel
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: ugui
     Info_8:
       Name: menupanel
       Dependencies: {}
     Info_9:
+      Name: splashpanel
+      Dependencies: {}
+    Info_10:
+      Name: talkpanel
+      Dependencies: {}
+    Info_11:
       Name: assetbundleconfig
       Dependencies: {}

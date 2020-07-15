@@ -172,5 +172,36 @@ PrefabInstance:
       propertyPath: LoadFromAssetBundle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1957036881648380, guid: 87ecbd5e96a942f49a9da886262aad5e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20930222341217332, guid: 87ecbd5e96a942f49a9da886262aad5e,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 92976984781561994, guid: 87ecbd5e96a942f49a9da886262aad5e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 124291258706751268, guid: 87ecbd5e96a942f49a9da886262aad5e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904915254746868, guid: 87ecbd5e96a942f49a9da886262aad5e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875862570, guid: 87ecbd5e96a942f49a9da886262aad5e, type: 3}
+      propertyPath: m_Name
+      value: Splash
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875862570, guid: 87ecbd5e96a942f49a9da886262aad5e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87ecbd5e96a942f49a9da886262aad5e, type: 3}

@@ -17,8 +17,6 @@ public class MenuUI : Window
         ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test1.png", OnLoadSpriteTest1, ELoadResPriority.RES_SLOW, true);
         ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test3.png", OnLoadSpriteTest3, ELoadResPriority.RES_HIGHT, true);
         ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test2.png", OnLoadSpriteTest2, ELoadResPriority.RES_HIGHT, true);
-
-        LoadMonsterData();
     }
 
     void LoadMonsterData()

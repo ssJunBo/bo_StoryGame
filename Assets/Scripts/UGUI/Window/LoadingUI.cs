@@ -32,9 +32,13 @@ public class LoadingUI : Window
     public void LoadOtherScene()
     {
         //根据场景名字打开对应场景第一个界面
-        if (m_SceneName==ConStr.MENUSCENE)
+        switch (m_SceneName)
         {
-            UIManager.Instance.PopUpWnd(ConStr.MENUPANEL);
+            case ConStr.MENUSCENE:
+                UIManager.Instance.PopUpWnd(ConStr.MENUPANEL);
+                break;
+            default:
+                break;
         }
         UIManager.Instance.CloseWnd(ConStr.LOADINGPANEL);
     }

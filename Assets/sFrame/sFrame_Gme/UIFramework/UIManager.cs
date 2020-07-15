@@ -90,6 +90,13 @@ public class UIManager : Singleton<UIManager>
                 m_WindowList[i].OnUpdate();
             }
         }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            foreach (var item in m_WindowList)
+            {
+                Debug.Log(item.GameObject.name);
+            }
+        }
     }
 
     /// <summary>

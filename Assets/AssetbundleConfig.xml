@@ -4,7 +4,9 @@
   <ABList Path="Assets/GameData/Data/Binary/BuffData.bytes" Crc="1740262205" ABName="bytes" AssetName="BuffData.bytes" />
   <ABList Path="Assets/GameData/Data/Binary/MonsterData.bytes" Crc="1110720144" ABName="bytes" AssetName="MonsterData.bytes" />
   <ABList Path="Assets/GameData/Prefabs/GameStart.prefab" Crc="2067334258" ABName="gamestart" AssetName="GameStart.prefab" />
-  <ABList Path="Assets/GameData/Prefabs/UGUI/Panel/LoadingPanel.prefab" Crc="155217535" ABName="loadingpanel" AssetName="LoadingPanel.prefab" />
+  <ABList Path="Assets/GameData/Prefabs/UGUI/Panel/LoadingPanel.prefab" Crc="155217535" ABName="loadingpanel" AssetName="LoadingPanel.prefab">
+    <ABDependce>ugui</ABDependce>
+  </ABList>
   <ABList Path="Assets/GameData/Prefabs/UGUI/Panel/MenuPanel.prefab" Crc="2521868572" ABName="menupanel" AssetName="MenuPanel.prefab" />
   <ABList Path="Assets/GameData/Prefabs/Effect/Particle1.prefab" Crc="3198229541" ABName="particle1" AssetName="Particle1.prefab" />
   <ABList Path="Assets/GameData/Shaders/NewSurfaceShader.shader" Crc="1407825588" ABName="shader" AssetName="NewSurfaceShader.shader" />
@@ -14,6 +16,9 @@
   <ABList Path="Assets/GameData/Sounds/kanong.mp3" Crc="1902165838" ABName="sound" AssetName="kanong.mp3" />
   <ABList Path="Assets/GameData/Sounds/menusound.mp3" Crc="3688897040" ABName="sound" AssetName="menusound.mp3" />
   <ABList Path="Assets/GameData/Sounds/senlin.mp3" Crc="3191718989" ABName="sound" AssetName="senlin.mp3" />
+  <ABList Path="Assets/GameData/Prefabs/UGUI/Panel/SplashPanel.prefab" Crc="651073096" ABName="splashpanel" AssetName="SplashPanel.prefab" />
+  <ABList Path="Assets/GameData/Prefabs/UGUI/Panel/TalkPanel.prefab" Crc="713355419" ABName="talkpanel" AssetName="TalkPanel.prefab" />
+  <ABList Path="Assets/GameData/UGUI/1.jpg" Crc="3871834535" ABName="ugui" AssetName="1.jpg" />
   <ABList Path="Assets/GameData/UGUI/test1.png" Crc="293304160" ABName="ugui" AssetName="test1.png" />
   <ABList Path="Assets/GameData/UGUI/test2.png" Crc="3962951110" ABName="ugui" AssetName="test2.png" />
   <ABList Path="Assets/GameData/UGUI/test3.png" Crc="1655680579" ABName="ugui" AssetName="test3.png" />

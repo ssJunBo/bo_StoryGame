@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 配置表路径
+/// </summary>
+public class CFG
+{
+    public const string TABLE_MONSTER = "Assets/GameData/Data/Binary/MonsterData.bytes";
+    public const string TABLE_BUFF = "Assets/GameData/Data/Binary/BuffData.bytes";
+}
+
 public class ConfigerManager : Singleton<ConfigerManager>
 {
     //存储所有已经加载的配置表 游戏刚开始进行配置表加载 一般不进行释放
@@ -70,11 +79,4 @@ public class ConfigerManager : Singleton<ConfigerManager>
     }
 }
 
-/// <summary>
-/// 配置表路径
-/// </summary>
-public class CFG
-{
-    public const string TABLE_MONSTER = "Assets/GameData/Data/Binary/MonsterData.bytes";
-    public const string TABLE_BUFF= "Assets/GameData/Data/Binary/BuffData.bytes";
-}
+

@@ -5,21 +5,14 @@ using UnityEngine.UI;
 public class GameStart : MonoSingleton<GameStart>
 {
     public bool LoadFromAssetBundle;
-
-    private GameObject objT;
     protected override void Awake()
     {
         base.Awake();
-
-        ResourceManager.Instance.m_LoadFromAssetBundle = LoadFromAssetBundle;
         GameObject.DontDestroyOnLoad(gameObject);
-
         //从ab包加载就要先加载配置表
+        ResourceManager.Instance.m_LoadFromAssetBundle = LoadFromAssetBundle;
         if (ResourceManager.Instance.m_LoadFromAssetBundle)
-        {
             AssetBundleManager.Instance.LoadAssetBundleConfig();
-        }
-
         ResourceManager.Instance.Init(this);
         ObjectManager.Instance.Init(transform.Find("RecyclePoolTrs"), transform.Find("SceneTrs"));
     }
@@ -33,10 +26,14 @@ public class GameStart : MonoSingleton<GameStart>
             transform.Find("UIRoot/UICamera").GetComponent<Camera>(),
             transform.Find("UIRoot/EventSystem").GetComponent<EventSystem>());
 
+        //用到的窗口要进行注册
         RegisterUI();
 
+        UIManager.Instance.PopUpWnd(ConStr.SPLASHPANEL);
         GameMapManager.Instance.Init(this);
-        GameMapManager.Instance.LoadScene(ConStr.MENUSCENE);
+        ToolsManager.TimeCallback(this, 1f, () => {
+            GameMapManager.Instance.LoadScene(ConStr.MENUSCENE);
+        });
     }
 
     //注册ui窗口
@@ -44,13 +41,14 @@ public class GameStart : MonoSingleton<GameStart>
     {
         UIManager.Instance.Register<MenuUI>(ConStr.MENUPANEL);
         UIManager.Instance.Register<LoadingUI>(ConStr.LOADINGPANEL);
+        UIManager.Instance.Register<SplahUI>(ConStr.SPLASHPANEL);
     }
 
     //加载配置表
     void LoadConfiger()
     {
-        ConfigerManager.Instance.LoadData<BuffData>(CFG.TABLE_BUFF);
-        ConfigerManager.Instance.LoadData<MonsterData>(CFG.TABLE_MONSTER);
+        //ConfigerManager.Instance.LoadData<BuffData>(CFG.TABLE_BUFF);
+        //ConfigerManager.Instance.LoadData<MonsterData>(CFG.TABLE_MONSTER);
     }
 
     private void Update()

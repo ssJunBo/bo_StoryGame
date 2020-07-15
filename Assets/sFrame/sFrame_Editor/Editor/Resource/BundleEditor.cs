@@ -282,7 +282,7 @@ public class BundleEditor
         config.ABList = new List<ABBase>();
         foreach (string path in resPathDic.Keys)
         {
-            if (ValidPath(path)) continue;
+            if (!ValidPath(path)) continue;
 
             ABBase abBase = new ABBase();
             abBase.Path = path;
