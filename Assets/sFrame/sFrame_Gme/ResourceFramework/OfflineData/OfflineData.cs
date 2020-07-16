@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OfflineData:MonoBehaviour
+public class OfflineData : MonoBehaviour
 {
     public Rigidbody m_Rigidbody;
     public Collider m_Collider;
@@ -12,17 +12,19 @@ public class OfflineData:MonoBehaviour
     public Vector3[] m_Pos;
     public Vector3[] m_Scale;
     public Quaternion[] m_Rot;
+    public Vector3 m_SelfScale;
 
     /// <summary>
     /// 还原属性
     /// </summary>
     public virtual void ResetProp()
     {
+        transform.localScale = m_SelfScale;
         int allPointCount = m_AllPoint.Length;
         for (int i = 0; i < allPointCount; i++)
         {
             Transform tempTrs = m_AllPoint[i];
-            if (tempTrs!=null)
+            if (tempTrs != null)
             {
                 tempTrs.localPosition = m_Pos[i];
                 tempTrs.localRotation = m_Rot[i];
@@ -42,7 +44,7 @@ public class OfflineData:MonoBehaviour
                         tempTrs.gameObject.SetActive(false);
                     }
                 }
-                if (tempTrs.childCount>m_AllPointChildCount[i])
+                if (tempTrs.childCount > m_AllPointChildCount[i])
                 {
                     int childCount = tempTrs.childCount;
                     for (int j = m_AllPointChildCount[i]; j < childCount; j++)
@@ -81,5 +83,6 @@ public class OfflineData:MonoBehaviour
             m_Rot[i] = temp.localRotation;
             m_Scale[i] = temp.localScale;
         }
+        m_SelfScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 }

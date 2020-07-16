@@ -14,6 +14,7 @@ public class UIOfflineData : OfflineData
 
     public override void ResetProp()
     {
+        transform.localScale = m_SelfScale;
         int allPointCount = m_AllPoint.Length;
         for (int i = 0; i < allPointCount; i++)
         {
@@ -107,5 +108,6 @@ public class UIOfflineData : OfflineData
             m_SizeDelta[i] = temp.sizeDelta;
             m_AnchoredPos[i] = temp.anchoredPosition3D;
         }
+        m_SelfScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 }

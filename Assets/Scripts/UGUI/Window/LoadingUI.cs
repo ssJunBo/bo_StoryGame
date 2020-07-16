@@ -1,14 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class LoadingUI : Window
+public class LoadingUI : BaseUI
 {
 
     private LoadingPanel m_MainPanel;
     private string m_SceneName;
 
-    public override void Awake(params object[] paraList)
+    public override void OnAwake(params object[] paraList)
     {
         m_MainPanel = GameObject.GetComponent<LoadingPanel>();
         m_SceneName = (string)paraList[0];
@@ -18,9 +17,10 @@ public class LoadingUI : Window
     {
         if (m_MainPanel == null) return;
 
-        m_MainPanel.m_Slider.value = GameMapManager.LoadingProgress / 100.0f;
-        m_MainPanel.m_Text.text = string.Format("{0}%", GameMapManager.LoadingProgress);
-        if (GameMapManager.LoadingProgress >= 99)
+        m_MainPanel = GameObject.GetComponent<LoadingPanel>();
+        m_MainPanel.m_Slider.value = MapManager.LoadingProgress / 100.0f;
+        m_MainPanel.m_Text.text = string.Format("{0}%", MapManager.LoadingProgress);
+        if (MapManager.LoadingProgress >= 99)
         {
             LoadOtherScene();
         }
@@ -35,12 +35,12 @@ public class LoadingUI : Window
         switch (m_SceneName)
         {
             case ConStr.MENUSCENE:
-                UIManager.Instance.PopUpWnd(ConStr.MENUPANEL);
+                GameManager.Instance.UIManager.PopUpWnd(ConStr.MENUPANEL);
                 break;
             default:
                 break;
         }
-        UIManager.Instance.CloseWnd(ConStr.LOADINGPANEL);
+        GameManager.Instance.UIManager.CloseWnd(ConStr.LOADINGPANEL);
     }
 
 }

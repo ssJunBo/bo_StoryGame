@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1748262196
+CRC: 3155896484
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -37,5 +37,8 @@ AssetBundleManifest:
       Name: talkpanel
       Dependencies: {}
     Info_11:
+      Name: tipspanel
+      Dependencies: {}
+    Info_12:
       Name: assetbundleconfig
       Dependencies: {}

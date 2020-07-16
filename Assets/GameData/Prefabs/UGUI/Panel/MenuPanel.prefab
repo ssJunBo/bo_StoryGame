@@ -507,8 +507,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224032802500770500}
-  - component: {fileID: 114948746781654394}
   - component: {fileID: 82362156553218384}
+  - component: {fileID: 2893525240183379193}
+  - component: {fileID: 114778006851714758}
   m_Layer: 5
   m_Name: MenuPanel
   m_TagString: Untagged
@@ -536,25 +537,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &114948746781654394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1468572433690162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0750ff29a6d2e3c4ab916b4f8919e3c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StartButton: {fileID: 114334812762760694}
-  m_LoadButton: {fileID: 114626173651220434}
-  m_ExitButton: {fileID: 114600992930483996}
-  m_Audio: {fileID: 82362156553218384}
-  m_Test1: {fileID: 114273500971438714}
-  m_Test2: {fileID: 114084350080611360}
-  m_Test3: {fileID: 114677353946599700}
 --- !u!82 &82362156553218384
 AudioSource:
   m_ObjectHideFlags: 0
@@ -651,6 +633,150 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2893525240183379193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468572433690162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88174fbad7db38146a8a24709f802771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Audio: {fileID: 82362156553218384}
+  m_StartButton: {fileID: 114334812762760694}
+  m_LoadButton: {fileID: 114626173651220434}
+  m_ExitButton: {fileID: 114600992930483996}
+  m_Test1: {fileID: 114273500971438714}
+  m_Test2: {fileID: 114084350080611360}
+  m_Test3: {fileID: 114677353946599700}
+--- !u!114 &114778006851714758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468572433690162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825def85e30f77d45978ac508c41ed85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Rigidbody: {fileID: 0}
+  m_Collider: {fileID: 0}
+  m_AllPoint:
+  - {fileID: 224032802500770500}
+  - {fileID: 224543732965852326}
+  - {fileID: 224850127755531166}
+  - {fileID: 224318517431455802}
+  - {fileID: 224829657134561936}
+  - {fileID: 224528641851619352}
+  - {fileID: 224234319213327476}
+  - {fileID: 224725155646684678}
+  - {fileID: 224923935991865738}
+  - {fileID: 224967788733117424}
+  - {fileID: 224602242643685684}
+  m_AllPointChildCount: 0100000006000000010000000000000001000000000000000100000000000000000000000000000000000000
+  m_AllPointActive: 0101010101010101010101
+  m_Pos:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: -300, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: -600, y: -300, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 600, y: -300, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: -550, y: 288, z: 0}
+  - {x: 0, y: 288, z: 0}
+  - {x: 550, y: 288, z: 0}
+  m_Scale:
+  - {x: 1, y: 1, z: 1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 0.99959993, y: 0.99959993, z: 0.99959993}
+  - {x: 1, y: 1, z: 1}
+  - {x: 0.99959993, y: 0.99959993, z: 0.99959993}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1, y: 1, z: 1}
+  - {x: 1.0001067, y: 1.0001067, z: 1.0001067}
+  - {x: 1.0001067, y: 1.0001067, z: 1.0001067}
+  m_Rot:
+  - {x: 0, y: 0, z: 0, w: 1}
+  - {x: 0, y: 0, z: 0, w: 1}
+  - {x: 0, y: 0, z: 0, w: 1}
+  - {x: 0, y: 0, z: 0, w: 1}
+  - {x: -0, y: -0, z: -0, w: 1}
+  - {x: 0, y: 0, z: 0, w: 1}
+  - {x: -0, y: -0, z: -0, w: 1}
+  - {x: 0, y: 0, z: 0, w: 1}
+  - {x: 0, y: 0, z: 0, w: 1}
+  - {x: -0, y: -0, z: -0, w: 1}
+  - {x: -0, y: -0, z: -0, w: 1}
+  m_AnchorMax:
+  - {x: 1, y: 1}
+  - {x: 1, y: 1}
+  - {x: 0.5, y: 0.5}
+  - {x: 1, y: 1}
+  - {x: 0.5, y: 0.5}
+  - {x: 1, y: 1}
+  - {x: 0.5, y: 0.5}
+  - {x: 1, y: 1}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  m_AnchorMin:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0.5, y: 0.5}
+  - {x: 0, y: 0}
+  - {x: 0.5, y: 0.5}
+  - {x: 0, y: 0}
+  - {x: 0.5, y: 0.5}
+  - {x: 0, y: 0}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  m_Pivot:
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
+  m_SizeDelta:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 400, y: 200}
+  - {x: 0, y: 0}
+  - {x: 400, y: 200}
+  - {x: 0, y: 0}
+  - {x: 400, y: 200}
+  - {x: 0, y: 0}
+  - {x: 300, y: 300}
+  - {x: 300, y: 300}
+  - {x: 300, y: 300}
+  m_AnchoredPos:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: -300, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: -600, y: -300, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 600, y: -300, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: -550, y: 288, z: 0}
+  - {x: 0, y: 288, z: 0}
+  - {x: 550, y: 288, z: 0}
+  m_Particle: []
 --- !u!1 &1537012999922870
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,12 +8,12 @@ public enum EUIMshID
     None = 0,
 }
 
-public class UIManager : Singleton<UIManager>
+public class UIManager 
 {
     //UI节点
     private RectTransform m_UiRoot;
     //窗口节点
-    private RectTransform m_WndRoot;
+    public RectTransform m_WndRoot;
     //UI摄像机
     private Camera m_UICamera;
     //EventSystem 节点
@@ -21,14 +21,14 @@ public class UIManager : Singleton<UIManager>
     //屏幕的宽高比
     private float m_CanvasRate = 0;
 
-    private  string m_UIPrefabPath = "Assets/GameData/Prefabs/UGUI/Panel/";
+    private string m_UIPrefabPath = "Assets/GameData/Prefabs/UGUI/Panel/";
     //注册的字典
     private Dictionary<string, System.Type> m_RegisterDic = new Dictionary<string, System.Type>();
 
     //所有打开的窗口
-    private Dictionary<string, Window> m_WindowDic = new Dictionary<string, Window>();
+    private Dictionary<string, BaseUI> m_WindowDic = new Dictionary<string, BaseUI>();
     //打开的窗口列表
-    private List<Window> m_WindowList = new List<Window>();
+    private List<BaseUI> m_WindowList = new List<BaseUI>();
 
 
     /// <summary>
@@ -104,7 +104,7 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     /// <typeparam name="T">窗口泛型类</typeparam>
     /// <param name="name">窗口名</param>
-    public void Register<T>(string name) where T : Window
+    public void Register<T>(string name) where T : BaseUI
     {
         m_RegisterDic[name] = typeof(T);
     }
@@ -118,7 +118,7 @@ public class UIManager : Singleton<UIManager>
     /// <returns></returns>
     public bool SendMessageToWnd(string name, EUIMshID msgID = 0, params object[] paraList)
     {
-        Window wnd = FindWndByName<Window>(name);
+        BaseUI wnd = FindWndByName<BaseUI>(name);
         if (wnd != null)
         {
             return wnd.OnMessage(msgID, paraList);
@@ -132,9 +132,9 @@ public class UIManager : Singleton<UIManager>
     /// <typeparam name="T"></typeparam>
     /// <param name="name"></param>
     /// <returns></returns>
-    public T FindWndByName<T>(string name) where T : Window
+    public T FindWndByName<T>(string name) where T : BaseUI
     {
-        Window wnd = null;
+        BaseUI wnd = null;
         if (m_WindowDic.TryGetValue(name, out wnd))
         {
             return (T)wnd;
@@ -151,21 +151,23 @@ public class UIManager : Singleton<UIManager>
     /// <param name="para2"></param>
     /// <param name="para3"></param>
     /// <returns></returns>
-    public Window PopUpWnd(string wndName, bool bTop = true, params object[] paraList)
+    public BaseUI PopUpWnd(string wndName, bool bTop = true, params object[] paraList)
     {
-        Window wnd = FindWndByName<Window>(wndName);
+        BaseUI wnd = FindWndByName<BaseUI>(wndName);
         if (wnd == null)
         {
             System.Type tp = null;
             if (m_RegisterDic.TryGetValue(wndName, out tp))
             {
-                wnd = System.Activator.CreateInstance(tp) as Window;
+                //继承自mono的无法用此方法实例化出来
+                wnd = System.Activator.CreateInstance(tp) as BaseUI;
             }
             else
             {
                 Debug.LogError("找不到窗口对应的脚本，窗口名是：" + wndName);
                 return null;
             }
+
             GameObject wndObj = ObjectManager.Instance.InstantiateObject(m_UIPrefabPath + wndName, false, false);
             if (wndObj == null)
             {
@@ -182,7 +184,7 @@ public class UIManager : Singleton<UIManager>
             wnd.GameObject = wndObj;
             wnd.Transform = wndObj.transform;
             wnd.Name = wndName;
-            wnd.Awake(paraList);
+            wnd.OnAwake(paraList);
             wndObj.transform.SetParent(m_WndRoot, false);
             if (bTop)
             {
@@ -204,7 +206,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="destroy"></param>
     public void CloseWnd(string name, bool destroy = false)
     {
-        Window wnd = FindWndByName<Window>(name);
+        BaseUI wnd = FindWndByName<BaseUI>(name);
         CloseWnd(wnd, destroy);
     }
 
@@ -213,7 +215,7 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     /// <param name="window"></param>
     /// <param name="destroy"></param>
-    public void CloseWnd(Window window, bool destroy = false)
+    public void CloseWnd(BaseUI window, bool destroy = false)
     {
         if (window != null)
         {
@@ -263,7 +265,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="name"></param>
     public void HideWnd(string name)
     {
-        Window wnd = FindWndByName<Window>(name);
+        BaseUI wnd = FindWndByName<BaseUI>(name);
         HideWnd(wnd);
     }
 
@@ -271,7 +273,7 @@ public class UIManager : Singleton<UIManager>
     /// 根据窗口对象隐藏窗口
     /// </summary>
     /// <param name="wnd"></param>
-    public void HideWnd(Window wnd)
+    public void HideWnd(BaseUI wnd)
     {
         if (wnd != null)
         {
@@ -286,7 +288,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="name"></param>
     public void ShowWnd(string name, bool bTop = true, params object[] paraList)
     {
-        Window wnd = FindWndByName<Window>(name);
+        BaseUI wnd = FindWndByName<BaseUI>(name);
         ShowWnd(wnd, bTop, paraList);
     }
 
@@ -295,7 +297,7 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     /// <param name="wnd"></param>
     /// <param name="paraList"></param>
-    public void ShowWnd(Window wnd, bool bTop = true, params object[] paraList)
+    public void ShowWnd(BaseUI wnd, bool bTop = true, params object[] paraList)
     {
         if (wnd != null)
         {

@@ -352,8 +352,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224637795710728128}
-  - component: {fileID: 114738030946872960}
-  - component: {fileID: 114560163366478604}
+  - component: {fileID: 908430568444372045}
+  - component: {fileID: 114053100505514812}
   m_Layer: 5
   m_Name: LoadingPanel
   m_TagString: Untagged
@@ -384,7 +384,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &114738030946872960
+--- !u!114 &908430568444372045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -393,12 +393,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1701625954776696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783ceda2378f0a34cb27eb5d2c32015b, type: 3}
+  m_Script: {fileID: 11500000, guid: ad7a659101fdcdb41a445a74fa92f6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Slider: {fileID: 114500786372457258}
   m_Text: {fileID: 114362640457133218}
---- !u!114 &114560163366478604
+--- !u!114 &114053100505514812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -422,19 +422,25 @@ MonoBehaviour:
   - {fileID: 224426187161080870}
   - {fileID: 224124896729463404}
   - {fileID: 224636868294390092}
-  m_AllPointChildCount: 020000000100000003000000000000000100000000000000010000000000000000000000
-  m_AllPointActive: 010101010101010101
+  - {fileID: 1245355325}
+  - {fileID: 7206282800004354636}
+  m_AllPointChildCount: 0400000001000000030000000000000001000000000000000100000000000000000000000000000000000000
+  m_AllPointActive: 0101010101010100010101
   m_Pos:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -461, z: 0}
+  - {x: 0, y: 155, z: 0}
+  - {x: 0, y: -1.6000004, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: -5, y: 0, z: 0}
-  - {x: -765, y: -5, z: 0}
+  - {x: -830, y: -15.400001, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: -765, y: -10, z: 0}
-  - {x: -273, y: 245, z: 0}
+  - {x: -820, y: -18.6, z: 0}
+  - {x: -192, y: 202.99988, z: 0}
+  - {x: 0, y: -1379, z: 0}
+  - {x: 0, y: -719, z: 0}
   m_Scale:
+  - {x: 1, y: 1, z: 1}
+  - {x: 1, y: 1, z: 1}
   - {x: 1, y: 1, z: 1}
   - {x: 1, y: 1, z: 1}
   - {x: 1, y: 1, z: 1}
@@ -454,27 +460,35 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0, w: 1}
   - {x: 0, y: 0, z: 0, w: 1}
   - {x: 0, y: 0, z: 0, w: 1}
+  - {x: 0, y: 0, z: 0, w: 1}
+  - {x: 0, y: 0, z: 0, w: 1}
   m_AnchorMax:
   - {x: 1, y: 1}
   - {x: 1, y: 1}
-  - {x: 0.5, y: 0.5}
-  - {x: 1, y: 0.75}
-  - {x: 1, y: 0.75}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 1, y: 1}
   - {x: 0, y: 0}
   - {x: 1, y: 1}
   - {x: 0, y: 0}
   - {x: 1, y: 0}
+  - {x: 1, y: 1}
+  - {x: 0.5, y: 0.5}
   m_AnchorMin:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  - {x: 0.5, y: 0.5}
-  - {x: 0, y: 0.25}
-  - {x: 0, y: 0.25}
+  - {x: 0.5, y: 0}
+  - {x: 0.5, y: 0}
+  - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 1, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0.5, y: 0.5}
   m_Pivot:
+  - {x: 0.5, y: 0.5}
+  - {x: 0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
@@ -487,23 +501,27 @@ MonoBehaviour:
   m_SizeDelta:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  - {x: 1550, y: 20}
+  - {x: 1660, y: 37.2}
+  - {x: 1660, y: 34}
+  - {x: 0, y: -6.4}
   - {x: 0, y: 0}
   - {x: -20, y: 0}
-  - {x: 10, y: 0}
-  - {x: -20, y: 0}
   - {x: 20, y: 0}
-  - {x: 341.59998, y: 151}
+  - {x: 207.4, y: 91.7}
+  - {x: 0, y: -3089}
+  - {x: 720, y: 720}
   m_AnchoredPos:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -461, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: -5, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 155, z: 0}
+  - {x: 0, y: 17, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: -273, y: 245, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: -192, y: 202.99988, z: 0}
+  - {x: 0, y: -1379, z: 0}
+  - {x: 0, y: -719, z: 0}
   m_Particle: []
 --- !u!1 &1721541377175238
 GameObject:

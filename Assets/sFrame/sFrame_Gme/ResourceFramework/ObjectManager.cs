@@ -70,7 +70,7 @@ public class ObjectManager : Singleton<ObjectManager>
     }
 
     /// <summary>
-    /// 清楚某个资源在对象池中所有的对象
+    /// 清除某个资源在对象池中所有的对象
     /// </summary>
     /// <param name="crc"></param>
     public void ClearPoolObject(uint crc)
@@ -208,7 +208,7 @@ public class ObjectManager : Singleton<ObjectManager>
     }
 
     /// <summary>
-    /// 同步加载
+    /// 对象池 实例化物体  同步加载
     /// </summary>
     /// <param name="path"></param>
     /// <param name="bClear"></param>
