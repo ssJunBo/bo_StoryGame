@@ -22,12 +22,17 @@ public class UIManager
     private float m_CanvasRate = 0;
 
     private string m_UIPrefabPath = "Assets/GameData/Prefabs/UGUI/Panel/";
-    //注册的字典
+    /// <summary>
+    /// 注册的字典
+    /// </summary>
     private Dictionary<string, System.Type> m_RegisterDic = new Dictionary<string, System.Type>();
-
-    //所有打开的窗口
+    /// <summary>
+    /// 所有打开的窗口
+    /// </summary>
     private Dictionary<string, BaseUI> m_WindowDic = new Dictionary<string, BaseUI>();
-    //打开的窗口列表
+    /// <summary>
+    /// 打开的窗口列表
+    /// </summary>
     private List<BaseUI> m_WindowList = new List<BaseUI>();
 
 
@@ -90,13 +95,6 @@ public class UIManager
                 m_WindowList[i].OnUpdate();
             }
         }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            foreach (var item in m_WindowList)
-            {
-                Debug.Log(item.GameObject.name);
-            }
-        }
     }
 
     /// <summary>
@@ -154,7 +152,7 @@ public class UIManager
     public BaseUI PopUpWnd(string wndName, bool bTop = true, params object[] paraList)
     {
         BaseUI wnd = FindWndByName<BaseUI>(wndName);
-        if (wnd == null)
+        if (wnd == null|| wnd.GameObject.activeSelf)
         {
             System.Type tp = null;
             if (m_RegisterDic.TryGetValue(wndName, out tp))
@@ -168,7 +166,7 @@ public class UIManager
                 return null;
             }
 
-            GameObject wndObj = ObjectManager.Instance.InstantiateObject(m_UIPrefabPath + wndName, false, false);
+            GameObject wndObj = ObjectManager.Instance.SpwanObjFromPool(m_UIPrefabPath + wndName, false, false);
             if (wndObj == null)
             {
                 Debug.Log("创建创建口Prefab失败：" + wndName);
@@ -223,11 +221,13 @@ public class UIManager
             window.OnClose();
             if (m_WindowDic.ContainsKey(window.Name))
             {
-                m_WindowDic.Remove(window.Name);
+                 m_WindowDic.Remove(window.Name);
                 m_WindowList.Remove(window);
             }
+
             if (destroy)
             {
+               
                 ObjectManager.Instance.ReleaseObject(window.GameObject, 0, true);
             }
             else

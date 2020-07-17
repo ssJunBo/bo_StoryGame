@@ -6,9 +6,7 @@ public class MenuUI : BaseUI
     private MenuPanel m_MainPanel;
     public override void OnAwake(params object[] paraList)
     {
-
         m_MainPanel = GameObject.GetComponent<MenuPanel>();
-      
 
         AddButtonClickListener(m_MainPanel.m_StartButton, OnClickStart);
         AddButtonClickListener(m_MainPanel.m_LoadButton, OnClickLoad);
@@ -65,7 +63,8 @@ public class MenuUI : BaseUI
 
     void OnClickLoad()
     {
-        Debug.Log("点击了加载游戏");
+        Debug.Log("什 么 情 况 呢  ?");
+        GameManager.Instance.UIManager.PopUpWnd(ConStr._TipsPanel,true);
     }
 
     void OnClickExit()

@@ -194,7 +194,7 @@ public class ObjectManager : Singleton<ObjectManager>
         List<GameObject> tempGameObjectList = new List<GameObject>();
         for (int i = 0; i < count; i++)
         {
-            GameObject obj = InstantiateObject(path, false, bClear: clear);
+            GameObject obj = SpwanObjFromPool(path, false, bClear: clear);
             tempGameObjectList.Add(obj);
         }
 
@@ -208,12 +208,14 @@ public class ObjectManager : Singleton<ObjectManager>
     }
 
     /// <summary>
-    /// 对象池 实例化物体  同步加载
+    /// 对象池中取出obj，没有就新例化一个 同步加载
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="path">资源路径</param>
+    /// <param name="setSceneObj">是否设置到场景对象池管理位置</param>
     /// <param name="bClear"></param>
+    /// <param name="targetTransform">实例化到此tranform下</param>
     /// <returns></returns>
-    public GameObject InstantiateObject(string path, bool setSceneObj = false, bool bClear = true)
+    public GameObject SpwanObjFromPool(string path, bool setSceneObj = false, bool bClear = true,Transform targetTransform=null)
     {
         uint crc = CRC32.GetCRC32(path);
         ResourceObj resourceObj = GetObjectFromPool(crc);
@@ -228,13 +230,24 @@ public class ObjectManager : Singleton<ObjectManager>
             if (resourceObj.m_ResItem.m_Obj != null)
             {
                 resourceObj.m_CloneObj = GameObject.Instantiate(resourceObj.m_ResItem.m_Obj) as GameObject;
-                resourceObj.m_OfflineData = resourceObj.m_CloneObj.GetComponent<OfflineData>();
+                if (resourceObj.m_CloneObj.GetComponent<OfflineData>()!=null)
+                {
+                    resourceObj.m_OfflineData = resourceObj.m_CloneObj.GetComponent<OfflineData>();
+                }
             }
         }
-
-        if (setSceneObj)
+        if (targetTransform!=null)
         {
-            resourceObj.m_CloneObj.transform.SetParent(SceneTrs, false);
+            resourceObj.m_CloneObj.transform.SetParent(targetTransform, true);
+            if(resourceObj.m_OfflineData)
+                resourceObj.m_OfflineData.ResetProp();
+        }
+        else
+        {
+            if (setSceneObj)
+            {
+                resourceObj.m_CloneObj.transform.SetParent(SceneTrs, false);
+            }
         }
 
         int tempID = resourceObj.m_CloneObj.GetInstanceID();

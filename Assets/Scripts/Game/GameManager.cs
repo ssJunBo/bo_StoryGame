@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class GameManager : MonoSingleton<GameManager>
@@ -16,8 +17,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         get { return audioManager; }
     }
-    private MapManager gameMapManager;
-    public MapManager MapManager
+    private SceneManager gameMapManager;
+    public SceneManager MapManager
     {
         get { return gameMapManager; }
     }
@@ -26,7 +27,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void InitManager()
     {
         uiManager = new UIManager();
-        gameMapManager = new MapManager();
+        gameMapManager = new SceneManager(this);
         audioManager = new AudioManager();
     }
 
@@ -56,41 +57,53 @@ public class GameManager : MonoSingleton<GameManager>
         //用到的窗口要进行注册
         RegisterUI();
 
-        UIManager.PopUpWnd(ConStr.SPLASHPANEL);
-        MapManager.Init(this);
+
+        UIManager.PopUpWnd(ConStr._SplashPanel);
+
         ToolsManager.TimeCallback(this, 1f, () =>
         {
-            UIManager.CloseWnd(ConStr.SPLASHPANEL);
+            UIManager.CloseWnd(ConStr._SplashPanel,true);
             MapManager.LoadScene(ConStr.MENUSCENE);
         });
 
-        ObjectManager.Instance.PreLoadGameObject(ConStr.Attack_Path, 2);
-        ObjectManager.Instance.PreLoadGameObject(ConStr.TipsPanel_Path,5);
+        ObjectManager.Instance.PreLoadGameObject(ConStr.TipsPanel_Path, 3);
+    }
 
-        GameObject tipObj = ObjectManager.Instance.InstantiateObject(ConStr.TipsPanel_Path);
-        tipObj.transform.SetParent(UIManager.m_WndRoot);
-        tipObj.GetComponent<UIOfflineData>().ResetProp();
-
+    private void Update()
+    {
+        UIManager.OnUpdate();
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            ShowTips("你好啊全世界 ！"+Random.Range(0,5).ToString());
+        }
     }
 
     //注册ui窗口
     void RegisterUI()
     {
-        UIManager.Register<MenuUI>(ConStr.MENUPANEL);
-        UIManager.Register<LoadingUI>(ConStr.LOADINGPANEL);
-        UIManager.Register<SplashUI>(ConStr.SPLASHPANEL);
+        UIManager.Register<MenuUI>(ConStr._MenuPanel);
+        UIManager.Register<LoadingUI>(ConStr._LoadingPanel);
+        UIManager.Register<SplashUI>(ConStr._SplashPanel);
+        //UIManager.Register<TipsUI>(ConStr._TipsPanel);
     }
 
-    //加载配置表
+    /// <summary>
+    /// 加载配置表 需要什么配置表都在这里加载
+    /// </summary>
     void LoadConfiger()
     {
         //ConfigerManager.Instance.LoadData<BuffData>(CFG.TABLE_BUFF);
         //ConfigerManager.Instance.LoadData<MonsterData>(CFG.TABLE_MONSTER);
     }
 
-    private void Update()
+    /// <summary>
+    /// 提示展示
+    /// </summary>
+    /// <param name="strContent"></param>
+    void ShowTips(string strContent)
     {
-        UIManager.OnUpdate();
+        GameObject tipObj = ObjectManager.Instance.SpwanObjFromPool(ConStr.TipsPanel_Path, targetTransform: UIManager.m_WndRoot);
+        tipObj.GetComponent<TipsItem>().content.text = strContent;
     }
 
     private void OnApplicationQuit()

@@ -14,12 +14,14 @@ public class UIOfflineData : OfflineData
 
     public override void ResetProp()
     {
+        Debug.Log("为 什 么 不 进 来 啊 ！");
+
         transform.localScale = m_SelfScale;
         int allPointCount = m_AllPoint.Length;
         for (int i = 0; i < allPointCount; i++)
         {
             RectTransform tempTrs = m_AllPoint[i] as RectTransform;
-            if (tempTrs!=null)
+            if (tempTrs != null)
             {
                 tempTrs.localPosition = m_Pos[i];
                 tempTrs.localRotation = m_Rot[i];
@@ -109,5 +111,6 @@ public class UIOfflineData : OfflineData
             m_AnchoredPos[i] = temp.anchoredPosition3D;
         }
         m_SelfScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+       
     }
 }

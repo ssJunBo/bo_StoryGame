@@ -18,9 +18,9 @@ public class LoadingUI : BaseUI
         if (m_MainPanel == null) return;
 
         m_MainPanel = GameObject.GetComponent<LoadingPanel>();
-        m_MainPanel.m_Slider.value = MapManager.LoadingProgress / 100.0f;
-        m_MainPanel.m_Text.text = string.Format("{0}%", MapManager.LoadingProgress);
-        if (MapManager.LoadingProgress >= 99)
+        m_MainPanel.m_Slider.value = SceneManager.LoadingProgress / 100.0f;
+        m_MainPanel.m_Text.text = string.Format("{0}%", SceneManager.LoadingProgress);
+        if (SceneManager.LoadingProgress >= 99)
         {
             LoadOtherScene();
         }
@@ -35,12 +35,12 @@ public class LoadingUI : BaseUI
         switch (m_SceneName)
         {
             case ConStr.MENUSCENE:
-                GameManager.Instance.UIManager.PopUpWnd(ConStr.MENUPANEL);
+                GameManager.Instance.UIManager.PopUpWnd(ConStr._MenuPanel);
                 break;
             default:
                 break;
         }
-        GameManager.Instance.UIManager.CloseWnd(ConStr.LOADINGPANEL);
+        GameManager.Instance.UIManager.CloseWnd(ConStr._LoadingPanel);
     }
 
 }

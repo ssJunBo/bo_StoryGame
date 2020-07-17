@@ -152,7 +152,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u52A0\u8F7D\u6E38\u620F"
+  m_Text: "\u63D0\u793A\u5C55\u793A"
 --- !u!1 &1235785339342404
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +716,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0, w: 1}
   - {x: -0, y: -0, z: -0, w: 1}
   - {x: -0, y: -0, z: -0, w: 1}
+  m_SelfScale: {x: 0, y: 0, z: 0}
   m_AnchorMax:
   - {x: 1, y: 1}
   - {x: 1, y: 1}

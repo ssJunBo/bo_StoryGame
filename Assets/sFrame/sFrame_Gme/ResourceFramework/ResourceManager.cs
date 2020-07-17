@@ -93,10 +93,24 @@ public class AsyncCallBack
     }
 }
 
-//资源加载回调
+/// <summary>
+/// 资源加载回调
+/// </summary>
+/// <param name="path"></param>
+/// <param name="obj"></param>
+/// <param name="param1"></param>
+/// <param name="param2"></param>
+/// <param name="param3"></param>
 public delegate void OnAsyncObjFinish(string path, Object obj, object param1 = null, object param2 = null, object param3 = null);
 
-//实例化对象加载完成回调
+/// <summary>
+/// 实例化对象加载完成回调
+/// </summary>
+/// <param name="path"></param>
+/// <param name="objObj"></param>
+/// <param name="param1"></param>
+/// <param name="param2"></param>
+/// <param name="param3"></param>
 public delegate void OnAsyncFinish(string path, ResourceObj objObj, object param1 = null, object param2 = null, object param3 = null);
 
 public class ResourceManager : Singleton<ResourceManager>
@@ -104,11 +118,17 @@ public class ResourceManager : Singleton<ResourceManager>
 
     protected long m_Guid = 0;
     public bool m_LoadFromAssetBundle = false;
-    //缓存使用的资源列表 
+    /// <summary>
+    /// 缓存使用的资源列表 
+    /// </summary>
     public Dictionary<uint, ResourceItem> AssetDic = new Dictionary<uint, ResourceItem>();
-    //缓存应用为零的资源列表，达到缓存最大的时 释放这个列表里面最早没用的资源
+    /// <summary>
+    /// 缓存应用为零的资源列表，达到缓存最大的时 释放这个列表里面最早没用的资源
+    /// </summary>
     protected CMapList<ResourceItem> m_NoRefrenceAssetMapList = new CMapList<ResourceItem>();
-    //中间类 回调类 的类对象池
+    /// <summary>
+    /// 中间类 回调类 的类对象池
+    /// </summary>
     protected ClassObjectPool<AsyncLoadResParam> m_AsyncLoadResParamPool = new ClassObjectPool<AsyncLoadResParam>(50);
     protected ClassObjectPool<AsyncCallBack> m_AsyncCallBackPool = new ClassObjectPool<AsyncCallBack>(100);
     //Mono脚本

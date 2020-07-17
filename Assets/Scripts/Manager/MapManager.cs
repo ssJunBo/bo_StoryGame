@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MapManager 
+public class SceneManager
 {
     //加载场景完成回调
     public Action LoadSceneOverCallBack;
@@ -21,11 +21,7 @@ public class MapManager
 
     private MonoBehaviour m_Mono;
 
-    /// <summary>
-    /// 场景管理初始化
-    /// </summary>
-    /// <param name="mono"></param>
-    public void Init(MonoBehaviour mono)
+    public SceneManager(MonoBehaviour mono)
     {
         m_Mono = mono;
     }
@@ -38,7 +34,7 @@ public class MapManager
     {
         LoadingProgress = 0;
         m_Mono.StartCoroutine(LoadSceneAsync(name));
-         GameManager.Instance.UIManager.PopUpWnd(ConStr.LOADINGPANEL,true,name);
+        GameManager.Instance.UIManager.PopUpWnd(ConStr._LoadingPanel, true, name);
     }
 
     /// <summary>
@@ -58,14 +54,14 @@ public class MapManager
         }
         ClearCache();
         AlreadyLoadScene = false;
-        AsyncOperation unLoadScene = SceneManager.LoadSceneAsync(ConStr.EMPTYSCENE, LoadSceneMode.Single);
+        AsyncOperation unLoadScene = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(ConStr.EMPTYSCENE, LoadSceneMode.Single);
         while (unLoadScene != null && !unLoadScene.isDone)
         {
             yield return new WaitForEndOfFrame();
         }
         LoadingProgress = 0;
         int targetProgress = 0;
-        AsyncOperation asyncScene = SceneManager.LoadSceneAsync(name);
+        AsyncOperation asyncScene = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(name);
         if (asyncScene != null && !asyncScene.isDone)
         {
             asyncScene.allowSceneActivation = false;
