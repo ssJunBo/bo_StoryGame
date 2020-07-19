@@ -8,13 +8,17 @@ public class MenuUI : BaseUI
     {
         m_MainPanel = GameObject.GetComponent<MenuPanel>();
 
-        AddButtonClickListener(m_MainPanel.m_StartButton, OnClickStart);
-        AddButtonClickListener(m_MainPanel.m_LoadButton, OnClickLoad);
-        AddButtonClickListener(m_MainPanel.m_ExitButton, OnClickExit);
+        AddButtonClickListener(m_MainPanel.pianzhang_btn, OnClickChapter);
+        AddButtonClickListener(m_MainPanel.chengjiu_btn , OnClickAchievement);
+        AddButtonClickListener(m_MainPanel.newgame_btn , OnClickNewGame);
+        AddButtonClickListener(m_MainPanel.goon_btn, OnClickGoOn);
 
-        ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test1.png", OnLoadSpriteTest1, ELoadResPriority.RES_SLOW, true);
-        ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test3.png", OnLoadSpriteTest3, ELoadResPriority.RES_HIGHT, true);
-        ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test2.png", OnLoadSpriteTest2, ELoadResPriority.RES_HIGHT, true);
+        m_MainPanel.head_img.sprite = ResourceManager.Instance.LoadResouce<Sprite>("Assets/GameData/UGUI/test/test2.png");
+
+
+        //ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test/test1.png", OnLoadSpriteTest1, ELoadResPriority.RES_SLOW, true);
+        //ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test/test3.png", OnLoadSpriteTest3, ELoadResPriority.RES_HIGHT, true);
+        //ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test/test2.png", OnLoadSpriteTest2, ELoadResPriority.RES_HIGHT, true);
     }
 
     void LoadMonsterData()
@@ -31,7 +35,6 @@ public class MenuUI : BaseUI
         if (obj != null)
         {
             Sprite sp = obj as Sprite;
-            m_MainPanel.m_Test1.sprite = sp;
         }
     }
     void OnLoadSpriteTest2(string path, Object obj, object param1 = null, object param2 = null, object param3 = null)
@@ -39,7 +42,6 @@ public class MenuUI : BaseUI
         if (obj != null)
         {
             Sprite sp = obj as Sprite;
-            m_MainPanel.m_Test2.sprite = sp;
         }
     }
     void OnLoadSpriteTest3(string path, Object obj, object param1 = null, object param2 = null, object param3 = null)
@@ -47,7 +49,6 @@ public class MenuUI : BaseUI
         if (obj != null)
         {
             Sprite sp = obj as Sprite;
-            m_MainPanel.m_Test3.sprite = sp;
         }
     }
 
@@ -56,19 +57,23 @@ public class MenuUI : BaseUI
 
     }
 
-    void OnClickStart()
+    void OnClickChapter()
     {
-        Debug.Log("点击了开始游戏");
+        GameManager.Instance.UIManager.PopUpWnd(ConStr._ChapterPanel,paraList:5);
     }
 
-    void OnClickLoad()
+    void OnClickAchievement()
     {
-        Debug.Log("什 么 情 况 呢  ?");
-        GameManager.Instance.UIManager.PopUpWnd(ConStr._TipsPanel,true);
+        GameManager.Instance.ShowTips("奥哦i");
     }
 
-    void OnClickExit()
+    void OnClickNewGame()
     {
-        Debug.Log("点击了退出游戏");
+        Debug.Log("点击了新的游戏");
+    }
+
+    void OnClickGoOn()
+    {
+        Debug.Log("点击了继续游戏");
     }
 }

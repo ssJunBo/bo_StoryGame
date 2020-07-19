@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1440106607
+CRC: 1434379887
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8628efc21f8f8fad8c9e1db98de30e8b
+    Hash: 7dde19b274fbd8c7a46da022a7384f4d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bc5d14edf01ea73acf49f46256b9cb11
+    Hash: d6b759261b31ff27131d2ee9cd57b81e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -22,7 +22,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 7862a20a5c496ea4483ac90424519146, type: 3}
+  Script: {fileID: 11500000, guid: 825def85e30f77d45978ac508c41ed85, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c651d7e6c67c16e49a349e3b64fcd727, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -32,5 +34,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/GameData/Prefabs/UGUI/Panel/TipsPanel.prefab
+- Assets/GameData/Prefabs/UGUI/Item/TipsItem.prefab
 Dependencies: []

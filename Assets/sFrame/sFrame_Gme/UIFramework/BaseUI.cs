@@ -23,16 +23,11 @@ public class BaseUI
 
     public virtual void OnAwake(params object[] paraList) { }
 
-    public virtual void OnShow(params object[] paraList) { }
+    public virtual void OnStart(params object[] paraList) { }
 
     public virtual void OnDisable() { }
 
     public virtual void OnUpdate() { }
-
-    private void Update()
-    {
-        OnUpdate();
-    }
 
     public virtual void OnClose()
     {

@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class MenuPanel : MonoBehaviour
 {
-    public AudioSource m_Audio;
-
-    public Button m_StartButton;
-    public Button m_LoadButton;
-    public Button m_ExitButton;
-
-    public Image m_Test1;
-    public Image m_Test2;
-    public Image m_Test3;
+    public Button pianzhang_btn;
+    public Button chengjiu_btn;
+    public Button newgame_btn;
+    public Button goon_btn;
+    public Image head_img;
+    public Image coin_img;
+    public Text coin_te;
 }

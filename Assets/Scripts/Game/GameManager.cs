@@ -1,10 +1,17 @@
-﻿using UnityEditor;
+﻿using DG.Tweening;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     public bool LoadFromAssetBundle;
+
+    #region UI挂点
+    public Image bgImg;
+    public GameObject beginTe;
+    #endregion
 
     #region Manager 属性
     private UIManager uiManager;
@@ -51,22 +58,23 @@ public class GameManager : MonoSingleton<GameManager>
 
         UIManager.Init(transform.Find("UIRoot") as RectTransform,
                transform.Find("UIRoot/WndRoot") as RectTransform,
-               transform.Find("UIRoot/UICamera").GetComponent<Camera>(),
-               transform.Find("UIRoot/EventSystem").GetComponent<EventSystem>());
+               transform.Find("UICamera").GetComponent<Camera>(),
+               transform.Find("EventSystem").GetComponent<EventSystem>());
 
         //用到的窗口要进行注册
         RegisterUI();
+        //预加载几个提示框
+        ObjectManager.Instance.PreLoadGameObject(ConStr.tipsItem_Path, 2);
+        //点击开始渐隐渐显效果
+        ToolsManager.PingpongTexe(beginTe.gameObject, 1, 0, 1);
+        ToolsManager.AddListenObj(bgImg.gameObject, GoMenuScene);
 
+    }
 
-        UIManager.PopUpWnd(ConStr._SplashPanel);
-
-        ToolsManager.TimeCallback(this, 1f, () =>
-        {
-            UIManager.CloseWnd(ConStr._SplashPanel,true);
-            MapManager.LoadScene(ConStr.MENUSCENE);
-        });
-
-        ObjectManager.Instance.PreLoadGameObject(ConStr.TipsPanel_Path, 3);
+    void GoMenuScene()
+    {
+        MapManager.LoadScene(ConStr.MENUSCENE);
+        ToolsManager.SetActive(bgImg.gameObject, false);
     }
 
     private void Update()
@@ -74,7 +82,7 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager.OnUpdate();
         if (Input.GetKeyDown(KeyCode.D))
         {
-            ShowTips("你好啊全世界 ！"+Random.Range(0,5).ToString());
+            ShowTips("你好啊全世界 ！" + Random.Range(0, 5).ToString());
         }
     }
 
@@ -83,8 +91,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         UIManager.Register<MenuUI>(ConStr._MenuPanel);
         UIManager.Register<LoadingUI>(ConStr._LoadingPanel);
-        UIManager.Register<SplashUI>(ConStr._SplashPanel);
-        //UIManager.Register<TipsUI>(ConStr._TipsPanel);
+        UIManager.Register<ChapterUI>(ConStr._ChapterPanel);
     }
 
     /// <summary>
@@ -100,9 +107,9 @@ public class GameManager : MonoSingleton<GameManager>
     /// 提示展示
     /// </summary>
     /// <param name="strContent"></param>
-    void ShowTips(string strContent)
+    public void ShowTips(string strContent)
     {
-        GameObject tipObj = ObjectManager.Instance.SpwanObjFromPool(ConStr.TipsPanel_Path, targetTransform: UIManager.m_WndRoot);
+        GameObject tipObj = ObjectManager.Instance.SpwanObjFromPool(ConStr.tipsItem_Path, targetTransform: UIManager.m_WndRoot);
         tipObj.GetComponent<TipsItem>().content.text = strContent;
     }
 

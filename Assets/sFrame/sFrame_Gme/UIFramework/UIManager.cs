@@ -8,7 +8,7 @@ public enum EUIMshID
     None = 0,
 }
 
-public class UIManager 
+public class UIManager
 {
     //UI节点
     private RectTransform m_UiRoot;
@@ -141,7 +141,7 @@ public class UIManager
     }
 
     /// <summary>
-    /// 打开窗口
+    /// 打开窗口 如果不存在则加载 存在直接show出来
     /// </summary>
     /// <param name="wndName"></param>
     /// <param name="bTop"></param>
@@ -152,7 +152,7 @@ public class UIManager
     public BaseUI PopUpWnd(string wndName, bool bTop = true, params object[] paraList)
     {
         BaseUI wnd = FindWndByName<BaseUI>(wndName);
-        if (wnd == null|| wnd.GameObject.activeSelf)
+        if (wnd == null || wnd.GameObject.activeSelf)
         {
             System.Type tp = null;
             if (m_RegisterDic.TryGetValue(wndName, out tp))
@@ -188,7 +188,13 @@ public class UIManager
             {
                 wndObj.transform.SetAsLastSibling();
             }
-            wnd.OnShow(paraList);
+            wnd.OnStart(paraList);
+
+            if (wnd.GameObject != null && !wnd.GameObject.activeSelf)
+            {
+                wnd.GameObject.SetActive(true);
+            }
+            if (bTop) wnd.Transform.SetAsLastSibling();
         }
         else
         {
@@ -209,7 +215,7 @@ public class UIManager
     }
 
     /// <summary>
-    /// 根据窗口对象关闭窗口
+    /// 根据窗口对象关闭窗口 从字典中移除
     /// </summary>
     /// <param name="window"></param>
     /// <param name="destroy"></param>
@@ -221,13 +227,13 @@ public class UIManager
             window.OnClose();
             if (m_WindowDic.ContainsKey(window.Name))
             {
-                 m_WindowDic.Remove(window.Name);
+                m_WindowDic.Remove(window.Name);
                 m_WindowList.Remove(window);
             }
 
             if (destroy)
             {
-               
+
                 ObjectManager.Instance.ReleaseObject(window.GameObject, 0, true);
             }
             else
@@ -307,7 +313,11 @@ public class UIManager
             }
             if (bTop) wnd.Transform.SetAsLastSibling();
 
-            wnd.OnShow(paraList);
+            //if (!ObjectManager.Instance.IsObjectManagerCreate(wnd.GameObject))
+            //{
+            //    Debug.Log("不是从对象池创建的 ？？？ ");
+            //}
+            wnd.OnStart(paraList);
         }
 
     }

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3155896484
+CRC: 2113801195
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -24,21 +24,21 @@ AssetBundleManifest:
       Name: gamestart
       Dependencies: {}
     Info_7:
-      Name: loadingpanel
-      Dependencies:
-        Dependency_0: ugui
+      Name: bookitem
+      Dependencies: {}
     Info_8:
-      Name: menupanel
+      Name: tipsitem
       Dependencies: {}
     Info_9:
-      Name: splashpanel
+      Name: chapterpanel
       Dependencies: {}
     Info_10:
-      Name: talkpanel
+      Name: loadingpanel
       Dependencies: {}
     Info_11:
-      Name: tipspanel
-      Dependencies: {}
+      Name: menupanel
+      Dependencies:
+        Dependency_0: ugui
     Info_12:
       Name: assetbundleconfig
       Dependencies: {}

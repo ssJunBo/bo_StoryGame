@@ -14,8 +14,6 @@ public class UIOfflineData : OfflineData
 
     public override void ResetProp()
     {
-        Debug.Log("为 什 么 不 进 来 啊 ！");
-
         transform.localScale = m_SelfScale;
         int allPointCount = m_AllPoint.Length;
         for (int i = 0; i < allPointCount; i++)

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 18174827
+CRC: 3788155247
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d793fda31a35c7ae3bad74e5ca331407
+    Hash: 9104bb961a10a3c0c0ea09f9b2729e0c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d981e8ccd2d2ac82e0c4f6bea2b2ee58
+    Hash: 68c57814a666b7725485436df89df8ec
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,13 +20,19 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
+  Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
   Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -1200242548, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: 1367256648, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
   Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 825def85e30f77d45978ac508c41ed85, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 88174fbad7db38146a8a24709f802771, type: 3}
+  Script: {fileID: 11500000, guid: 09b3b86042eb03941984950ef6976323, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -38,6 +44,5 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
-- Assets/GameData/Prefabs/UGUI/Panel/MenuPanel.prefab
-Dependencies:
-- F:/StoryGame_Project/Assets/StreamingAssets/ugui
+- Assets/GameData/Prefabs/UGUI/Panel/ChapterPanel.prefab
+Dependencies: []
