@@ -8,7 +8,7 @@ public class ConStr  {
     public const string _LoadingPanel = "LoadingPanel.prefab"; 
     public const string _MenuPanel = "MenuPanel.prefab";
     public const string _ChapterPanel = "ChapterPanel.prefab";
-
+    public const string _TalkPanel = "TalkPanel.prefab";
 
     //场景名称
     public const string EMPTYSCENE = "Empty";
@@ -18,6 +18,7 @@ public class ConStr  {
     //临时prefab路径
     public const string tipsItem_Path = "Assets/GameData/Prefabs/UGUI/Item/TipsItem.prefab";
     public const string bookItem_Path = "Assets/GameData/Prefabs/UGUI/Item/bookItem.prefab";
+    public const string talkItem_Path = "Assets/GameData/Prefabs/UGUI/Item/talkItem.prefab";
 
 
     //临时音乐资源

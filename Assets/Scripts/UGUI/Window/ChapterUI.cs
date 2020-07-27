@@ -27,7 +27,7 @@ public class ChapterUI : BaseUI
 
     void OnClickBack()
     {
-        for (int i = 0; i < itemLis.Count; i++)
+        for (int i = 0; i < itemLis.Count; i++) 
         {
             ObjectManager.Instance.ReleaseObject(itemLis[i]);
         }

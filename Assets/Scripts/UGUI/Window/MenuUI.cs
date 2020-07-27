@@ -17,10 +17,8 @@ public class MenuUI : BaseUI
 
 
         //ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test/test1.png", OnLoadSpriteTest1, ELoadResPriority.RES_SLOW, true);
-        //ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test/test3.png", OnLoadSpriteTest3, ELoadResPriority.RES_HIGHT, true);
-        //ResourceManager.Instance.AsyncLoadResource("Assets/GameData/UGUI/test/test2.png", OnLoadSpriteTest2, ELoadResPriority.RES_HIGHT, true);
     }
-
+    #region 测试异步加载资源
     void LoadMonsterData()
     {
         MonsterData monsterData = ConfigerManager.Instance.LoadData<MonsterData>(CFG.TABLE_MONSTER);
@@ -29,7 +27,6 @@ public class MenuUI : BaseUI
             Debug.Log(string.Format("ID:{0} 名字:{1} 外观:{2} 高度:{3} 稀有度:{4}", monsterData.AllMonster[i].Id, monsterData.AllMonster[i].Name, monsterData.AllMonster[i].OutLook, monsterData.AllMonster[i].Height, monsterData.AllMonster[i].Rare));
         }
     }
-
     void OnLoadSpriteTest1(string path, Object obj, object param1 = null, object param2 = null, object param3 = null)
     {
         if (obj != null)
@@ -37,20 +34,7 @@ public class MenuUI : BaseUI
             Sprite sp = obj as Sprite;
         }
     }
-    void OnLoadSpriteTest2(string path, Object obj, object param1 = null, object param2 = null, object param3 = null)
-    {
-        if (obj != null)
-        {
-            Sprite sp = obj as Sprite;
-        }
-    }
-    void OnLoadSpriteTest3(string path, Object obj, object param1 = null, object param2 = null, object param3 = null)
-    {
-        if (obj != null)
-        {
-            Sprite sp = obj as Sprite;
-        }
-    }
+    #endregion
 
     public override void OnUpdate()
     {
@@ -64,12 +48,13 @@ public class MenuUI : BaseUI
 
     void OnClickAchievement()
     {
-        GameManager.Instance.ShowTips("奥哦i");
+        GameManager.Instance.ShowTips("点击了成就按钮！");
     }
 
     void OnClickNewGame()
     {
-        Debug.Log("点击了新的游戏");
+        GameManager.Instance.UIManager.PopUpWnd(ConStr._TalkPanel, paraList: 1);
+        GameManager.Instance.UIManager.HideWnd(ConStr._MenuPanel);
     }
 
     void OnClickGoOn()

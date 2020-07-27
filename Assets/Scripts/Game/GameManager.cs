@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -65,6 +64,8 @@ public class GameManager : MonoSingleton<GameManager>
         RegisterUI();
         //预加载几个提示框
         ObjectManager.Instance.PreLoadGameObject(ConStr.tipsItem_Path, 2);
+        ObjectManager.Instance.PreLoadGameObject(ConStr.talkItem_Path, 5);
+
         //点击开始渐隐渐显效果
         ToolsManager.PingpongTexe(beginTe.gameObject, 1, 0, 1);
         ToolsManager.AddListenObj(bgImg.gameObject, GoMenuScene);
@@ -92,6 +93,7 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager.Register<MenuUI>(ConStr._MenuPanel);
         UIManager.Register<LoadingUI>(ConStr._LoadingPanel);
         UIManager.Register<ChapterUI>(ConStr._ChapterPanel);
+        UIManager.Register<TalkUI>(ConStr._TalkPanel);
     }
 
     /// <summary>
